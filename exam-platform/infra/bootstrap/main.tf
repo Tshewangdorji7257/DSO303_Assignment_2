@@ -36,7 +36,14 @@ resource "aws_s3_bucket_public_access_block" "state" {
 resource "aws_iam_openid_connect_provider" "github" {
   url             = "https://token.actions.githubusercontent.com"
   client_id_list  = ["sts.amazonaws.com"]
-  thumbprint_list = ["6938fd4d98bab03faadb97b34396831e3780aea1"]
+  thumbprint_list = ["ab9d0263244dd0326eb67015705a667e79cfe998"]
+
+  tags = {
+    Environment = "Development"
+    ManagedBy   = "Terraform"
+    Name        = "DSO303-GitHub-OIDC"
+    Project     = "DSO303-Assignment2"
+  }
 }
 
 resource "aws_iam_role" "github" {
