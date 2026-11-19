@@ -42,7 +42,7 @@ resource "aws_db_instance" "main" {
 
 # ---------- S3: frontend ----------
 resource "aws_s3_bucket" "frontend" {
-  bucket        = "${var.project}-frontend-${local.account_id}"
+  bucket        = "${var.project}-frontend-${local.account_id}-${var.region}"
   force_destroy = true
 }
 
@@ -78,7 +78,7 @@ resource "aws_s3_bucket_policy" "frontend" {
 
 # ---------- S3: student submissions ----------
 resource "aws_s3_bucket" "uploads" {
-  bucket        = "${var.project}-uploads-${local.account_id}"
+  bucket        = "${var.project}-uploads-${local.account_id}-${var.region}"
   force_destroy = true
 }
 
