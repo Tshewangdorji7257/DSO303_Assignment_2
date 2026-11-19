@@ -41,31 +41,41 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v4
 
-      # 2. Configure AWS credentials using GitHub OIDC
+      # 2. Check GitHub OIDC context
+      - name: Check GitHub OIDC context
+        run: |
+          echo "Repository: $GITHUB_REPOSITORY"
+          echo "Branch: $GITHUB_REF"
+          echo "Event: $GITHUB_EVENT_NAME"
+          echo "Actor: $GITHUB_ACTOR"
+          echo "Workflow: $GITHUB_WORKFLOW"
+
+      # 3. Configure AWS credentials using GitHub OIDC
       - name: Configure AWS credentials
         uses: aws-actions/configure-aws-credentials@v4
         with:
           role-to-assume: ${{ secrets.AWS_ROLE_ARN }}
           aws-region: ap-south-1
+          role-session-name: GitHubActionsDeploy
 
-      # 3. Verify AWS identity
+      # 4. Verify AWS identity
       - name: Verify AWS identity
         run: aws sts get-caller-identity
 
-      # 4. Install Terraform
+      # 5. Install Terraform
       - name: Setup Terraform
         uses: hashicorp/setup-terraform@v3
         with:
           terraform_version: 1.10.5
 
-      # 5. Build Lambda deployment package
+      # 6. Build Lambda deployment package
       - name: Build Lambda package
         working-directory: .
         run: |
           chmod +x scripts/build-lambda.sh
           ./scripts/build-lambda.sh
 
-      # 6. Initialize Terraform with S3 remote backend
+      # 7. Initialize Terraform with S3 remote backend
       - name: Terraform init
         run: |
           terraform init \
@@ -74,11 +84,11 @@ jobs:
             -backend-config="region=us-east-1" \
             -backend-config="use_lockfile=true"
 
-      # 7. Validate Terraform configuration
+      # 8. Validate Terraform configuration
       - name: Terraform validate
         run: terraform validate
 
-      # 8. Create ECR repository before building Docker image
+      # 9. Create ECR repository before building Docker image
       - name: Create ECR repository
         run: |
           terraform apply \
@@ -86,12 +96,12 @@ jobs:
             -target=aws_ecr_repository.api \
             -var="image_tag=${{ github.sha }}"
 
-      # 9. Authenticate Docker with Amazon ECR
+      # 10. Authenticate Docker with Amazon ECR
       - name: Login to Amazon ECR
         id: ecr
         uses: aws-actions/amazon-ecr-login@v2
 
-      # 10. Build and push API Docker image
+      # 11. Build and push API Docker image
       - name: Build and push API image
         working-directory: app/api
         run: |
@@ -101,18 +111,17 @@ jobs:
 
           docker push $IMAGE:${{ github.sha }}
 
-      # 11. Deploy complete AWS infrastructure
+      # 12. Deploy complete AWS infrastructure
       - name: Terraform apply - full stack
         run: |
           terraform apply \
             -auto-approve \
             -var="image_tag=${{ github.sha }}"
 
-      # 12. Publish frontend files to S3
+      # 13. Publish frontend files to S3
       - name: Publish frontend
         run: |
           BUCKET=$(terraform output -raw frontend_bucket)
-
           DIST=$(terraform output -raw cloudfront_distribution_id)
 
           aws s3 sync ../app/frontend s3://$BUCKET --delete
@@ -121,7 +130,7 @@ jobs:
             --distribution-id $DIST \
             --paths "/*"
 
-      # 13. Test application health
+      # 14. Test application health
       - name: Smoke test
         run: |
           URL=$(terraform output -raw site_url)
