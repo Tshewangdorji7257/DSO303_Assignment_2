@@ -8,10 +8,16 @@ variable "project" {
   default = "exam-tsd"
 }
 variable "github_repo" {
-  type = string
+  type        = string
+  description = "owner/repo, e.g. Tshewangdorji7257/DSO303_Assignment_2"
 }
 provider "aws" { region = var.region }
 data "aws_caller_identity" "me" {}
+
+locals {
+  gh_owner = split("/", var.github_repo)[0]
+  gh_name  = split("/", var.github_repo)[1]
+}
 
 resource "aws_s3_bucket" "state" {
   bucket = "${var.project}-tfstate-${data.aws_caller_identity.me.account_id}"
@@ -49,7 +55,15 @@ resource "aws_iam_role" "github" {
       Action    = "sts:AssumeRoleWithWebIdentity"
       Condition = {
         StringEquals = { "token.actions.githubusercontent.com:aud" = "sts.amazonaws.com" }
-        StringLike = { "token.actions.githubusercontent.com:sub" = "repo:${var.github_repo}:*" }
+        # GitHub may send either sub format:
+        #   repo:owner/repo:ref:refs/heads/main
+        #   repo:owner@<ownerId>/repo@<repoId>:ref:refs/heads/main  (immutable IDs)
+        StringLike = {
+          "token.actions.githubusercontent.com:sub" = [
+            "repo:${var.github_repo}:*",
+            "repo:${local.gh_owner}@*/${local.gh_name}@*:*"
+          ]
+        }
       }
     }]
   })
