@@ -35,7 +35,7 @@ resource "aws_db_instance" "main" {
   db_subnet_group_name   = aws_db_subnet_group.main.name
   vpc_security_group_ids = [aws_security_group.db.id]
 
-  backup_retention_period = 7 # automated backups + point-in-time recovery (RPO ~5 min)
+  backup_retention_period = 1 # free-plan account limit; production: 7-35 days + PITR
   skip_final_snapshot     = true
   deletion_protection     = false # set true in real production
 }
