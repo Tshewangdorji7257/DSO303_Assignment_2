@@ -9,7 +9,7 @@ app.use(express.json());
 
 // PGHOST, PGUSER, PGPASSWORD, PGDATABASE, PGSSLMODE come from environment (Secrets Manager in AWS)
 const pool = new Pool();
-const s3 = new S3Client({});
+const s3 = new S3Client({ requestChecksumCalculation: "WHEN_REQUIRED" });
 const sqs = new SQSClient({});
 
 // DEMO ONLY: in production the ALB/Cognito (or aws-jwt-verify) supplies the verified user id.
@@ -67,7 +67,7 @@ app.get("/api/uploads/presign", async (req, res) => {
     new PutObjectCommand({
       Bucket: process.env.UPLOAD_BUCKET,
       Key: key,
-      ServerSideEncryption: "aws:kms"
+
     }),
     { expiresIn: 300 });
   await pool.query("INSERT INTO submissions (student_id, s3_key) VALUES ($1,$2)", [user(req), key]);
