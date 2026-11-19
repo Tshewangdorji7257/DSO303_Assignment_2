@@ -17,7 +17,7 @@ const user = (req) => req.headers["x-user-id"] || "demo-student";
 
 app.get("/api/health", async (_req, res) => {
   try { await pool.query("SELECT 1"); res.send("ok"); }
-  catch (e) { res.status(503).send("db unavailable"); }
+  catch (e) { console.error("health: db error:", e.message); res.status(503).send("db unavailable"); }
 });
 
 // Questions (never returns the correct answer)
