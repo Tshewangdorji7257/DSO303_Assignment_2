@@ -1,19 +1,20 @@
-# Run ONCE from your laptop: creates the Terraform state bucket and the GitHub OIDC role.
 terraform {
   required_providers { aws = { source = "hashicorp/aws", version = "~> 5.60" } }
 }
 variable "region" {
   default = "us-east-1"
 }
+variable "project" {
+  default = "exam-tsd"
+}
 variable "github_repo" {
-  description = "owner/repo, e.g. jane/exam-platform"
-  type        = string
+  type = string
 }
 provider "aws" { region = var.region }
 data "aws_caller_identity" "me" {}
 
 resource "aws_s3_bucket" "state" {
-  bucket = "exam-platform-tfstate-${data.aws_caller_identity.me.account_id}"
+  bucket = "${var.project}-tfstate-${data.aws_caller_identity.me.account_id}"
 }
 resource "aws_s3_bucket_versioning" "state" {
   bucket = aws_s3_bucket.state.id
@@ -33,26 +34,18 @@ resource "aws_s3_bucket_public_access_block" "state" {
   restrict_public_buckets = true
 }
 
-resource "aws_iam_openid_connect_provider" "github" {
-  url             = "https://token.actions.githubusercontent.com"
-  client_id_list  = ["sts.amazonaws.com"]
-  thumbprint_list = ["ab9d0263244dd0326eb67015705a667e79cfe998"]
-
-  tags = {
-    Environment = "Development"
-    ManagedBy   = "Terraform"
-    Name        = "DSO303-GitHub-OIDC"
-    Project     = "DSO303-Assignment2"
-  }
+# The GitHub OIDC provider already exists in this shared account: reuse it
+data "aws_iam_openid_connect_provider" "github" {
+  url = "https://token.actions.githubusercontent.com"
 }
 
 resource "aws_iam_role" "github" {
-  name = "exam-platform-github-deploy"
+  name = "${var.project}-github-deploy"
   assume_role_policy = jsonencode({
     Version = "2012-10-17"
     Statement = [{
       Effect    = "Allow"
-      Principal = { Federated = aws_iam_openid_connect_provider.github.arn }
+      Principal = { Federated = data.aws_iam_openid_connect_provider.github.arn }
       Action    = "sts:AssumeRoleWithWebIdentity"
       Condition = {
         StringEquals = { "token.actions.githubusercontent.com:aud" = "sts.amazonaws.com" }
@@ -61,7 +54,6 @@ resource "aws_iam_role" "github" {
     }]
   })
 }
-# Broad for a coursework build; narrow this to the services used in real production.
 resource "aws_iam_role_policy_attachment" "admin" {
   role       = aws_iam_role.github.name
   policy_arn = "arn:aws:iam::aws:policy/AdministratorAccess"
