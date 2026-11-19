@@ -1,0 +1,401 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Online Exam</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Instrument+Sans:wght@400;500;600&family=Literata:opsz,wght@7..72,400;7..72,600&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --paper: #eef1f6;
+    --sheet: #ffffff;
+    --ink: #16213a;
+    --muted: #5b6578;
+    --line: #d5dbe6;
+    --blue: #2447d6;
+    --blue-soft: #e8edfd;
+    --green: #17795a;
+    --red: #b3261e;
+    --amber: #a15c00;
+    --ui: "Instrument Sans", system-ui, -apple-system, "Segoe UI", sans-serif;
+    --serif: "Literata", Georgia, "Times New Roman", serif;
+  }
+  * { box-sizing: border-box; }
+  html { scroll-padding-bottom: 6rem; }
+  body {
+    margin: 0; background: var(--paper); color: var(--ink);
+    font: 400 1rem/1.5 var(--ui); -webkit-font-smoothing: antialiased;
+  }
+  .page { max-width: 760px; margin: 0 auto; padding: 2rem 1rem 7rem; }
+
+  /* Header */
+  .masthead { display: flex; justify-content: space-between; align-items: flex-end; gap: 1rem; flex-wrap: wrap; margin-bottom: 1.25rem; }
+  h1 { font: 600 1.75rem/1.2 var(--serif); margin: 0; letter-spacing: -0.01em; }
+  .sub { color: var(--muted); margin: .25rem 0 0; font-size: .9375rem; }
+  .save { display: inline-flex; align-items: center; gap: .5rem; font-size: .875rem; color: var(--muted); }
+  .dot { width: .6rem; height: .6rem; border-radius: 50%; background: var(--line); flex: none; }
+  .save[data-state="ok"] .dot { background: var(--green); }
+  .save[data-state="ok"] { color: var(--green); }
+  .save[data-state="fail"] .dot { background: var(--red); }
+  .save[data-state="fail"] { color: var(--red); }
+
+  /* Progress: one segment per question */
+  .progress { display: flex; gap: 4px; margin-bottom: 1rem; }
+  .progress span { flex: 1; height: 6px; border-radius: 3px; background: var(--line); }
+  .progress span.done { background: var(--blue); }
+
+  /* The answer sheet */
+  .sheet { background: var(--sheet); border: 1px solid var(--line); border-radius: 10px; }
+  .q { display: grid; grid-template-columns: 3.25rem 1fr; padding: 1.5rem 1.5rem 1.25rem 0; }
+  .q + .q { border-top: 1px solid var(--line); }
+  .qn { font: 600 1.5rem/1.3 var(--serif); color: var(--blue); text-align: right; padding-right: 1rem; }
+  .qt { font: 400 1.1875rem/1.55 var(--serif); margin: 0 0 1rem; max-width: 60ch; }
+  .opts { display: grid; gap: .5rem; border: 0; padding: 0; margin: 0; }
+  .opt { position: relative; display: flex; align-items: center; gap: .75rem; padding: .625rem .875rem; border: 1px solid var(--line); border-radius: 8px; cursor: pointer; }
+  .opt:hover { border-color: #a9b4c9; }
+  .opt input { position: absolute; opacity: 0; inset: 0; margin: 0; cursor: pointer; }
+  .bubble { width: 1.75rem; height: 1.75rem; border-radius: 50%; border: 1.5px solid #8793aa; display: grid; place-items: center; font-size: .8125rem; font-weight: 600; color: var(--muted); flex: none; transition: background .12s, color .12s, border-color .12s; }
+  .opt:has(input:checked) { border-color: var(--blue); background: var(--blue-soft); }
+  .opt:has(input:checked) .bubble { background: var(--blue); border-color: var(--blue); color: #fff; }
+  .opt:has(input:focus-visible) { outline: 3px solid var(--blue); outline-offset: 2px; }
+  .opt:has(input:disabled) { cursor: default; opacity: .7; }
+  .opt:has(input:disabled):hover { border-color: var(--line); }
+  .opt:has(input:checked:disabled):hover { border-color: var(--blue); }
+
+  /* Result */
+  .result { margin-top: 1rem; padding: 1rem 1.25rem; border-radius: 10px; background: var(--sheet); border: 1px solid var(--line); }
+  .result[hidden] { display: none; }
+  .result strong { font: 600 1.5rem/1.3 var(--serif); }
+  .result.pending { color: var(--amber); }
+
+  /* Upload */
+  .upload { margin-top: 2.5rem; }
+  h2 { font: 600 1.25rem/1.3 var(--serif); margin: 0 0 .25rem; }
+  .drop { margin-top: 1rem; display: block; padding: 1.75rem 1rem; text-align: center; border: 2px dashed #a9b4c9; border-radius: 10px; background: var(--sheet); cursor: pointer; }
+  .drop:hover, .drop.over { border-color: var(--blue); background: var(--blue-soft); }
+  .drop:has(input:focus-visible) { outline: 3px solid var(--blue); outline-offset: 2px; }
+  .drop input { position: absolute; width: 1px; height: 1px; opacity: 0; }
+  .drop b { display: block; font-weight: 600; }
+  .drop small { color: var(--muted); }
+  .picked { display: flex; align-items: center; justify-content: space-between; gap: 1rem; flex-wrap: wrap; margin-top: .75rem; }
+  .picked[hidden] { display: none; }
+  .bar { height: 6px; border-radius: 3px; background: var(--line); overflow: hidden; margin-top: .75rem; }
+  .bar[hidden] { display: none; }
+  .bar i { display: block; height: 100%; width: 0; background: var(--blue); }
+  .msg { min-height: 1.5rem; margin: .5rem 0 0; font-size: .9375rem; color: var(--muted); }
+  .msg.ok { color: var(--green); }
+  .msg.err { color: var(--red); }
+
+  /* Buttons */
+  button { font: 600 .9375rem var(--ui); padding: .625rem 1.125rem; border-radius: 8px; border: 1px solid var(--line); background: var(--sheet); color: var(--ink); cursor: pointer; }
+  button:hover:not(:disabled) { border-color: #a9b4c9; }
+  button.primary { background: var(--blue); border-color: var(--blue); color: #fff; }
+  button.primary:hover:not(:disabled) { background: #1b39b3; border-color: #1b39b3; }
+  button:disabled { opacity: .5; cursor: not-allowed; }
+  button:focus-visible { outline: 3px solid var(--blue); outline-offset: 2px; }
+
+  /* Sticky action bar */
+  .actions { position: fixed; inset: auto 0 0 0; background: rgba(255,255,255,.96); border-top: 1px solid var(--line); }
+  .actions .in { max-width: 760px; margin: 0 auto; padding: .75rem 1rem; display: flex; align-items: center; justify-content: space-between; gap: 1rem; }
+  .count { font-size: .9375rem; color: var(--muted); }
+  .btns { display: flex; gap: .5rem; }
+
+  dialog { border: 0; border-radius: 12px; padding: 1.5rem; max-width: 24rem; width: calc(100% - 2rem); color: var(--ink); }
+  dialog::backdrop { background: rgba(22, 33, 58, .5); }
+  dialog h3 { font: 600 1.25rem/1.3 var(--serif); margin: 0 0 .5rem; }
+  dialog p { margin: 0 0 1.25rem; color: var(--muted); }
+  dialog .btns { justify-content: flex-end; }
+
+  .empty { padding: 2rem 1.5rem; color: var(--muted); }
+  .empty button { margin-top: .75rem; }
+
+  @media (max-width: 520px) {
+    .q { grid-template-columns: 1fr; padding: 1.25rem 1rem; }
+    .qn { text-align: left; padding: 0 0 .25rem; }
+    .count { display: none; }
+    .actions .btns { width: 100%; }
+    .actions .btns button { flex: 1; }
+  }
+  @media (prefers-reduced-motion: reduce) { * { transition: none !important; } }
+</style>
+</head>
+<body>
+<main class="page">
+  <header class="masthead">
+    <div>
+      <h1 id="title">Exam 1</h1>
+      <p class="sub">Choose one answer per question. Your answers save automatically every 30 seconds.</p>
+    </div>
+    <div class="save" id="save" data-state="idle" role="status" aria-live="polite">
+      <span class="dot"></span><span id="saveText">Not saved yet</span>
+    </div>
+  </header>
+
+  <div class="progress" id="progress" aria-hidden="true"></div>
+
+  <section class="sheet" id="qs" aria-label="Exam questions">
+    <p class="empty">Loading questions…</p>
+  </section>
+
+  <div class="result" id="resultBox" hidden role="status" aria-live="polite"></div>
+
+  <section class="upload">
+    <h2>Upload assignment</h2>
+    <p class="sub">PDF or ZIP, up to 50 MB.</p>
+    <label class="drop" id="drop">
+      <input type="file" id="f" accept=".pdf,.zip">
+      <b>Choose a file or drop it here</b>
+      <small>It uploads straight to storage, so large files are fine.</small>
+    </label>
+    <div class="picked" id="picked" hidden>
+      <span id="pickedName"></span>
+      <button class="primary" id="upload">Upload file</button>
+    </div>
+    <div class="bar" id="bar" hidden><i id="barFill"></i></div>
+    <p class="msg" id="uploadMsg" role="status" aria-live="polite"></p>
+  </section>
+</main>
+
+<div class="actions">
+  <div class="in">
+    <span class="count" id="count">0 of 0 answered</span>
+    <div class="btns">
+      <button id="result">Show result</button>
+      <button class="primary" id="submit" disabled>Submit exam</button>
+    </div>
+  </div>
+</div>
+
+<dialog id="confirm">
+  <h3>Submit your exam?</h3>
+  <p id="confirmText"></p>
+  <div class="btns">
+    <button id="cancel">Keep working</button>
+    <button class="primary" id="go">Submit exam</button>
+  </div>
+</dialog>
+
+<script>
+const EXAM = 1;
+const answers = {};
+let total = 0;
+let submitted = false;
+const $ = (id) => document.getElementById(id);
+
+function setSave(state, text) {
+  $("save").dataset.state = state;
+  $("saveText").textContent = text;
+}
+
+function updateProgress() {
+  const answered = Object.keys(answers).length;
+  $("progress").querySelectorAll("span").forEach((s, i) => s.classList.toggle("done", s.dataset.q in answers));
+  $("count").textContent = `${answered} of ${total} answered`;
+  $("submit").disabled = submitted || total === 0;
+}
+
+async function load() {
+  try {
+    const res = await fetch(`/api/exams/${EXAM}`);
+    if (!res.ok) throw new Error(res.status);
+    const d = await res.json();
+    if (d.title) $("title").textContent = d.title;
+    (d.saved || []).forEach((s) => (answers[s.question_id] = s.answer));
+    total = d.questions.length;
+
+    const prog = $("progress");
+    prog.textContent = "";
+    d.questions.forEach((q) => {
+      const s = document.createElement("span");
+      s.dataset.q = q.id;
+      prog.appendChild(s);
+    });
+
+    const root = $("qs");
+    root.textContent = "";
+    d.questions.forEach((q, n) => {
+      const row = document.createElement("div");
+      row.className = "q";
+      const num = document.createElement("div");
+      num.className = "qn";
+      num.textContent = n + 1;
+      const body = document.createElement("div");
+      const fs = document.createElement("fieldset");
+      fs.className = "opts";
+      const lg = document.createElement("legend");
+      lg.className = "qt";
+      lg.textContent = q.text;
+      fs.appendChild(lg);
+      q.options.forEach((o, i) => {
+        const l = document.createElement("label");
+        l.className = "opt";
+        const r = document.createElement("input");
+        r.type = "radio"; r.name = "q" + q.id; r.value = o;
+        r.checked = answers[q.id] === o;
+        r.onchange = () => { answers[q.id] = o; updateProgress(); };
+        const b = document.createElement("span");
+        b.className = "bubble";
+        b.textContent = String.fromCharCode(65 + i);
+        const t = document.createElement("span");
+        t.textContent = o;
+        l.append(r, b, t);
+        fs.appendChild(l);
+      });
+      body.appendChild(fs);
+      row.append(num, body);
+      root.appendChild(row);
+    });
+    updateProgress();
+  } catch (e) {
+    const root = $("qs");
+    root.textContent = "";
+    const p = document.createElement("div");
+    p.className = "empty";
+    p.textContent = "The questions could not be loaded. Check your connection and try again.";
+    const btn = document.createElement("button");
+    btn.textContent = "Try again";
+    btn.onclick = load;
+    p.appendChild(document.createElement("br"));
+    p.appendChild(btn);
+    root.appendChild(p);
+  }
+}
+
+async function autosave() {
+  if (submitted || !Object.keys(answers).length) return true;
+  try {
+    const r = await fetch(`/api/exams/${EXAM}/answers`, {
+      method: "PUT", headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(answers) });
+    if (!r.ok) throw new Error(r.status);
+    const j = await r.json();
+    setSave("ok", "Saved at " + new Date(j.at).toLocaleTimeString());
+    return true;
+  } catch (e) {
+    setSave("fail", "Save failed. Retrying in 30 seconds");
+    return false;
+  }
+}
+setInterval(autosave, 30000);   // every 30 seconds
+
+function showResult(html, pending) {
+  const box = $("resultBox");
+  box.hidden = false;
+  box.className = "result" + (pending ? " pending" : "");
+  box.textContent = "";
+  if (typeof html === "string") box.textContent = html;
+  else box.appendChild(html);
+}
+
+async function checkResult() {
+  try {
+    const j = await (await fetch(`/api/results/${EXAM}`)).json();
+    if (j.score === null || j.score === undefined) {
+      showResult("Your exam has not been marked yet.", true);
+      return false;
+    }
+    const s = document.createElement("strong");
+    s.textContent = `${j.score} of ${total}`;
+    const wrap = document.createElement("span");
+    wrap.append("Your score: ", s);
+    showResult(wrap, false);
+    return true;
+  } catch (e) {
+    showResult("The result could not be loaded. Try again in a moment.", true);
+    return false;
+  }
+}
+
+async function pollResult() {
+  for (let i = 0; i < 20; i++) {
+    await new Promise((r) => setTimeout(r, 3000));
+    if (await checkResult()) return;
+  }
+}
+
+$("submit").onclick = () => {
+  const answered = Object.keys(answers).length;
+  $("confirmText").textContent = answered < total
+    ? `You answered ${answered} of ${total} questions. You can’t change your answers after submitting.`
+    : `You answered all ${total} questions. You can’t change your answers after submitting.`;
+  $("confirm").showModal();
+};
+$("cancel").onclick = () => $("confirm").close();
+$("go").onclick = async () => {
+  $("confirm").close();
+  $("submit").disabled = true;
+  const saved = await autosave();
+  if (!saved) { $("submit").disabled = false; return; }
+  try {
+    const r = await fetch(`/api/exams/${EXAM}/submit`, { method: "POST" });
+    if (!r.ok) throw new Error(r.status);
+  } catch (e) {
+    setSave("fail", "Submit failed. Try again");
+    $("submit").disabled = false;
+    return;
+  }
+  submitted = true;
+  document.querySelectorAll("#qs input").forEach((i) => (i.disabled = true));
+  setSave("ok", "Submitted");
+  showResult("Submitted. Your exam is being marked. The score will appear here.", true);
+  updateProgress();
+  pollResult();
+};
+$("result").onclick = checkResult;
+
+/* Upload */
+let chosen = null;
+function choose(file) {
+  chosen = file || null;
+  $("uploadMsg").textContent = ""; $("uploadMsg").className = "msg";
+  $("bar").hidden = true;
+  if (!chosen) { $("picked").hidden = true; return; }
+  $("picked").hidden = false;
+  $("pickedName").textContent = `${chosen.name} (${(chosen.size / 1048576).toFixed(1)} MB)`;
+}
+function uploadMsg(text, cls) { $("uploadMsg").textContent = text; $("uploadMsg").className = "msg " + (cls || ""); }
+
+$("f").onchange = (e) => choose(e.target.files[0]);
+const drop = $("drop");
+["dragenter", "dragover"].forEach((ev) => drop.addEventListener(ev, (e) => { e.preventDefault(); drop.classList.add("over"); }));
+["dragleave", "drop"].forEach((ev) => drop.addEventListener(ev, (e) => { e.preventDefault(); drop.classList.remove("over"); }));
+drop.addEventListener("drop", (e) => { if (e.dataTransfer.files[0]) choose(e.dataTransfer.files[0]); });
+
+$("upload").onclick = async () => {
+  const f = chosen;
+  if (!f) return uploadMsg("Choose a file first.", "err");
+  if (!/\.(pdf|zip)$/i.test(f.name)) return uploadMsg("Only PDF or ZIP files are accepted.", "err");
+  if (f.size > 50 * 1024 * 1024) return uploadMsg("This file is over 50 MB. Choose a smaller file.", "err");
+  $("upload").disabled = true;
+  uploadMsg("Preparing upload…");
+  try {
+    const { url, key } = await (await fetch("/api/uploads/presign")).json();
+    $("bar").hidden = false; $("barFill").style.width = "0";
+    await new Promise((resolve, reject) => {
+      const x = new XMLHttpRequest();
+      x.open("PUT", url);
+      x.upload.onprogress = (e) => {
+        if (e.lengthComputable) {
+          const pct = Math.round((e.loaded / e.total) * 100);
+          $("barFill").style.width = pct + "%";
+          uploadMsg(`Uploading… ${pct}%`);
+        }
+      };
+      x.onload = () => (x.status >= 200 && x.status < 300 ? resolve() : reject(new Error("status " + x.status)));
+      x.onerror = () => reject(new Error("network"));
+      x.send(f);
+    });
+    uploadMsg("Uploaded. Your tutor will be notified. Reference: " + key, "ok");
+  } catch (e) {
+    uploadMsg("The upload failed. Check your connection and try again.", "err");
+  } finally {
+    $("upload").disabled = false;
+  }
+};
+
+load();
+</script>
+</body>
+</html>

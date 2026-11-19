@@ -1,0 +1,26 @@
+# Local test only: Postgres + API + frontend on http://localhost:8080
+services:
+  db:
+    image: postgres:16-alpine
+    environment: { POSTGRES_USER: exam, POSTGRES_PASSWORD: exam, POSTGRES_DB: exam }
+    volumes:
+      - ./app/api/schema.sql:/docker-entrypoint-initdb.d/1-schema.sql
+      - ./app/api/seed.sql:/docker-entrypoint-initdb.d/2-seed.sql
+    healthcheck: { test: ["CMD-SHELL", "pg_isready -U exam"], interval: 3s, retries: 10 }
+  api:
+    build: ./app/api
+    depends_on: { db: { condition: service_healthy } }
+    environment:
+      PGHOST: db
+      PGUSER: exam
+      PGPASSWORD: exam
+      PGDATABASE: exam
+      PGSSLMODE: disable
+      FRONTEND_DIR: /frontend
+      UPLOAD_BUCKET: local-bucket
+      MARKING_QUEUE_URL: http://localhost/none
+      AWS_REGION: us-east-1
+      AWS_ACCESS_KEY_ID: local
+      AWS_SECRET_ACCESS_KEY: local
+    volumes: ["./app/frontend:/frontend:ro"]
+    ports: ["8081:8080"]
