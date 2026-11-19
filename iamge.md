@@ -41,3 +41,5 @@ verify
 2c. Add the GitHub settings. In your repo, go to Settings → Secrets and variables → Actions.
 
 ![alt text](image-14.png)
+
+2d. Commit the lock file and trigger the pipeline.

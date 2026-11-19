@@ -1,0 +1,4101 @@
+{
+  "version": 4,
+  "terraform_version": "1.13.3",
+  "serial": 26,
+  "lineage": "10369c38-e037-b8c3-8eb1-9c13223830fa",
+  "outputs": {
+    "api_endpoint": {
+      "value": "https://b2mvv6mkae.execute-api.us-east-1.amazonaws.com",
+      "type": "string"
+    },
+    "availability_zones": {
+      "value": [
+        "us-east-1a",
+        "us-east-1b"
+      ],
+      "type": [
+        "list",
+        "string"
+      ]
+    },
+    "dashboard_url": {
+      "value": "https://us-east-1.console.aws.amazon.com/cloudwatch/home?region=us-east-1#dashboards:name=exam-platform-prod",
+      "type": "string"
+    },
+    "db_instance_id": {
+      "value": "exam-platform-prod-db",
+      "type": "string"
+    },
+    "frontend_bucket": {
+      "value": "exam-platform-prod-web-363242104805",
+      "type": "string"
+    },
+    "region": {
+      "value": "us-east-1",
+      "type": "string"
+    },
+    "uploads_bucket": {
+      "value": "exam-platform-prod-uploads-363242104805",
+      "type": "string"
+    }
+  },
+  "resources": [
+    {
+      "mode": "data",
+      "type": "archive_file",
+      "name": "backend",
+      "provider": "provider[\"registry.terraform.io/hashicorp/archive\"]",
+      "instances": [
+        {
+          "schema_version": 0,
+          "attributes": {
+            "exclude_symlink_directories": null,
+            "excludes": [
+              "local",
+              "local/server.js",
+              "package-lock.json",
+              "test",
+              "test/marking.test.js"
+            ],
+            "id": "f12e619507b4b7fa0414b14a5e5481f808ca1d7d",
+            "output_base64sha256": "dNl6f7a7c8TdZek+g0PgNEtxaGfHQBmbTjb2cyfljS0=",
+            "output_base64sha512": "KWiHYPYJRQG/B0uiWV5SwF1poJe7KgUqMU2TVDGubUfPiq9+sSmpknB8Fk6A8zuyvx+e1yN762SSUG0pkh9vdg==",
+            "output_file_mode": null,
+            "output_md5": "e27a732c241132599e50d81cc8cc6c61",
+            "output_path": "./.build/backend.zip",
+            "output_sha": "f12e619507b4b7fa0414b14a5e5481f808ca1d7d",
+            "output_sha256": "74d97a7fb6bb73c4dd65e93e8343e0344b716867c740199b4e36f67327e58d2d",
+            "output_sha512": "29688760f6094501bf074ba2595e52c05d69a097bb2a052a314d935431ae6d47cf8aaf7eb129a992707c164e80f33bb2bf1f9ed7237beb6492506d29921f6f76",
+            "output_size": 5212627,
+            "source": [],
+            "source_content": null,
+            "source_content_filename": null,
+            "source_dir": "./../backend",
+            "source_file": null,
+            "type": "zip"
+          },
+          "sensitive_attributes": [],
+          "identity_schema_version": 0
+        }
+      ]
+    },
+    {
+      "mode": "data",
+      "type": "aws_availability_zones",
+      "name": "available",
+      "provider": "provider[\"registry.terraform.io/hashicorp/aws\"]",
+      "instances": [
+        {
+          "schema_version": 0,
+          "attributes": {
+            "all_availability_zones": null,
+            "exclude_names": null,
+            "exclude_zone_ids": null,
+            "filter": null,
+            "group_names": [
+              "us-east-1-zg-1"
+            ],
+            "id": "us-east-1",
+            "names": [
+              "us-east-1a",
+              "us-east-1b",
+              "us-east-1c",
+              "us-east-1d",
+              "us-east-1e",
+              "us-east-1f"
+            ],
+            "state": "available",
+            "timeouts": null,
+            "zone_ids": [
+              "use1-az1",
+              "use1-az2",
+              "use1-az4",
+              "use1-az6",
+              "use1-az3",
+              "use1-az5"
+            ]
+          },
+          "sensitive_attributes": [],
+          "identity_schema_version": 0
+        }
+      ]
+    },
+    {
+      "mode": "data",
+      "type": "aws_caller_identity",
+      "name": "current",
+      "provider": "provider[\"registry.terraform.io/hashicorp/aws\"]",
+      "instances": [
+        {
+          "schema_version": 0,
+          "attributes": {
+            "account_id": "363242104805",
+            "arn": "arn:aws:sts::363242104805:assumed-role/exam-platform-github-deploy/GitHubActions",
+            "id": "363242104805",
+            "user_id": "AROAVJEXKU7SXYEM3EE7H:GitHubActions"
+          },
+          "sensitive_attributes": [],
+          "identity_schema_version": 0
+        }
+      ]
+    },
+    {
+      "mode": "managed",
+      "type": "aws_acm_certificate",
+      "name": "main",
+      "provider": "provider[\"registry.terraform.io/hashicorp/aws\"].us_east_1",
+      "instances": []
+    },
+    {
+      "mode": "managed",
+      "type": "aws_acm_certificate_validation",
+      "name": "main",
+      "provider": "provider[\"registry.terraform.io/hashicorp/aws\"].us_east_1",
+      "instances": []
+    },
+    {
+      "mode": "managed",
+      "type": "aws_apigatewayv2_api",
+      "name": "main",
+      "provider": "provider[\"registry.terraform.io/hashicorp/aws\"]",
+      "instances": [
+        {
+          "schema_version": 0,
+          "attributes": {
+            "api_endpoint": "https://b2mvv6mkae.execute-api.us-east-1.amazonaws.com",
+            "api_key_selection_expression": "$request.header.x-api-key",
+            "arn": "arn:aws:apigateway:us-east-1::/apis/b2mvv6mkae",
+            "body": null,
+            "cors_configuration": [],
+            "credentials_arn": null,
+            "description": "",
+            "disable_execute_api_endpoint": false,
+            "execution_arn": "arn:aws:execute-api:us-east-1:363242104805:b2mvv6mkae",
+            "fail_on_warnings": null,
+            "id": "b2mvv6mkae",
+            "ip_address_type": "ipv4",
+            "name": "exam-platform-prod-api",
+            "protocol_type": "HTTP",
+            "route_key": null,
+            "route_selection_expression": "$request.method $request.path",
+            "tags": null,
+            "tags_all": {
+              "Environment": "prod",
+              "ManagedBy": "terraform",
+              "Project": "exam-platform"
+            },
+            "target": null,
+            "version": ""
+          },
+          "sensitive_attributes": [],
+          "identity_schema_version": 0,
+          "private": "bnVsbA=="
+        }
+      ]
+    },
+    {
+      "mode": "managed",
+      "type": "aws_apigatewayv2_stage",
+      "name": "default",
+      "provider": "provider[\"registry.terraform.io/hashicorp/aws\"]",
+      "instances": [
+        {
+          "schema_version": 0,
+          "attributes": {
+            "access_log_settings": [
+              {
+                "destination_arn": "arn:aws:logs:us-east-1:363242104805:log-group:/aws/apigateway/exam-platform-prod",
+                "format": "{\"error\":\"$context.integrationErrorMessage\",\"ip\":\"$context.identity.sourceIp\",\"latency\":\"$context.responseLatency\",\"requestId\":\"$context.requestId\",\"route\":\"$context.routeKey\",\"status\":\"$context.status\",\"user\":\"$context.authorizer.claims.sub\"}"
+              }
+            ],
+            "api_id": "b2mvv6mkae",
+            "arn": "arn:aws:apigateway:us-east-1::/apis/b2mvv6mkae/stages/$default",
+            "auto_deploy": true,
+            "client_certificate_id": "",
+            "default_route_settings": [
+              {
+                "data_trace_enabled": false,
+                "detailed_metrics_enabled": true,
+                "logging_level": "",
+                "throttling_burst_limit": 5000,
+                "throttling_rate_limit": 2000
+              }
+            ],
+            "deployment_id": "",
+            "description": "",
+            "execution_arn": "arn:aws:execute-api:us-east-1:363242104805:b2mvv6mkae/$default",
+            "id": "$default",
+            "invoke_url": "https://b2mvv6mkae.execute-api.us-east-1.amazonaws.com/",
+            "name": "$default",
+            "route_settings": [],
+            "stage_variables": null,
+            "tags": null,
+            "tags_all": {
+              "Environment": "prod",
+              "ManagedBy": "terraform",
+              "Project": "exam-platform"
+            }
+          },
+          "sensitive_attributes": [],
+          "identity_schema_version": 0,
+          "private": "bnVsbA==",
+          "dependencies": [
+            "aws_apigatewayv2_api.main",
+            "aws_cloudwatch_log_group.api"
+          ]
+        }
+      ]
+    },
+    {
+      "mode": "managed",
+      "type": "aws_backup_plan",
+      "name": "main",
+      "provider": "provider[\"registry.terraform.io/hashicorp/aws\"]",
+      "instances": [
+        {
+          "schema_version": 1,
+          "attributes": {
+            "advanced_backup_setting": [],
+            "arn": "arn:aws:backup:us-east-1:363242104805:backup-plan:41eb6331-c745-4258-b21e-964ecdf5a2b8",
+            "id": "41eb6331-c745-4258-b21e-964ecdf5a2b8",
+            "name": "exam-platform-prod-plan",
+            "rule": [
+              {
+                "completion_window": 180,
+                "copy_action": [],
+                "enable_continuous_backup": false,
+                "lifecycle": [
+                  {
+                    "cold_storage_after": 0,
+                    "delete_after": 35,
+                    "opt_in_to_archive_for_supported_resources": false
+                  }
+                ],
+                "recovery_point_tags": {},
+                "rule_name": "daily",
+                "schedule": "cron(0 3 * * ? *)",
+                "schedule_expression_timezone": "Etc/UTC",
+                "start_window": 60,
+                "target_vault_name": "exam-platform-prod-vault"
+              },
+              {
+                "completion_window": 180,
+                "copy_action": [],
+                "enable_continuous_backup": false,
+                "lifecycle": [
+                  {
+                    "cold_storage_after": 90,
+                    "delete_after": 1825,
+                    "opt_in_to_archive_for_supported_resources": false
+                  }
+                ],
+                "recovery_point_tags": {},
+                "rule_name": "monthly-5-years",
+                "schedule": "cron(0 4 1 * ? *)",
+                "schedule_expression_timezone": "Etc/UTC",
+                "start_window": 60,
+                "target_vault_name": "exam-platform-prod-vault"
+              }
+            ],
+            "tags": null,
+            "tags_all": {
+              "Environment": "prod",
+              "ManagedBy": "terraform",
+              "Project": "exam-platform"
+            },
+            "version": "NGYxMjY2ZDUtYzZmNS00YWQ0LTk3YjctYjA2NjFiYmVlYmQ5"
+          },
+          "sensitive_attributes": [],
+          "identity_schema_version": 0,
+          "private": "eyJzY2hlbWFfdmVyc2lvbiI6IjEifQ==",
+          "dependencies": [
+            "aws_backup_vault.main",
+            "aws_kms_key.main"
+          ]
+        }
+      ]
+    },
+    {
+      "mode": "managed",
+      "type": "aws_backup_vault",
+      "name": "main",
+      "provider": "provider[\"registry.terraform.io/hashicorp/aws\"]",
+      "instances": [
+        {
+          "schema_version": 0,
+          "attributes": {
+            "arn": "arn:aws:backup:us-east-1:363242104805:backup-vault:exam-platform-prod-vault",
+            "force_destroy": true,
+            "id": "exam-platform-prod-vault",
+            "kms_key_arn": "arn:aws:kms:us-east-1:363242104805:key/a99cc916-c4f2-499c-a61d-ff859a2c5b8d",
+            "name": "exam-platform-prod-vault",
+            "recovery_points": 0,
+            "tags": null,
+            "tags_all": {
+              "Environment": "prod",
+              "ManagedBy": "terraform",
+              "Project": "exam-platform"
+            },
+            "timeouts": null
+          },
+          "sensitive_attributes": [],
+          "identity_schema_version": 0,
+          "private": "eyJlMmJmYjczMC1lY2FhLTExZTYtOGY4OC0zNDM2M2JjN2M0YzAiOnsiZGVsZXRlIjo2MDAwMDAwMDAwMDB9fQ==",
+          "dependencies": [
+            "aws_kms_key.main"
+          ]
+        }
+      ]
+    },
+    {
+      "mode": "managed",
+      "type": "aws_cloudfront_distribution",
+      "name": "main",
+      "provider": "provider[\"registry.terraform.io/hashicorp/aws\"]",
+      "instances": [
+        {
+          "schema_version": 1,
+          "attributes": {
+            "aliases": null,
+            "arn": "arn:aws:cloudfront::363242104805:distribution/E62NABAU6NDBT",
+            "caller_reference": "terraform-20261119065506766000000003",
+            "comment": "exam-platform-prod frontend + API",
+            "continuous_deployment_policy_id": "",
+            "custom_error_response": [],
+            "default_cache_behavior": [
+              {
+                "allowed_methods": [
+                  "GET",
+                  "HEAD",
+                  "OPTIONS"
+                ],
+                "cache_policy_id": "658327ea-f89d-4fab-a63d-7e88639e58f6",
+                "cached_methods": [
+                  "GET",
+                  "HEAD"
+                ],
+                "compress": true,
+                "default_ttl": 0,
+                "field_level_encryption_id": "",
+                "forwarded_values": [],
+                "function_association": [],
+                "grpc_config": [
+                  {
+                    "enabled": false
+                  }
+                ],
+                "lambda_function_association": [],
+                "max_ttl": 0,
+                "min_ttl": 0,
+                "origin_request_policy_id": "",
+                "realtime_log_config_arn": "",
+                "response_headers_policy_id": "67f7725c-6f97-4210-82d7-5512b31e9d03",
+                "smooth_streaming": false,
+                "target_origin_id": "frontend",
+                "trusted_key_groups": [],
+                "trusted_signers": [],
+                "viewer_protocol_policy": "redirect-to-https"
+              }
+            ],
+            "default_root_object": "index.html",
+            "domain_name": "dlsp0zp5ms3wl.cloudfront.net",
+            "enabled": true,
+            "etag": "E23ZP02F085DFQ",
+            "hosted_zone_id": "Z2FDTNDATAQYW2",
+            "http_version": "http2",
+            "id": "E62NABAU6NDBT",
+            "in_progress_validation_batches": 0,
+            "is_ipv6_enabled": true,
+            "last_modified_time": "2026-11-19 06:55:06.835 +0000 UTC",
+            "logging_config": [],
+            "ordered_cache_behavior": [
+              {
+                "allowed_methods": [
+                  "DELETE",
+                  "GET",
+                  "HEAD",
+                  "OPTIONS",
+                  "PATCH",
+                  "POST",
+                  "PUT"
+                ],
+                "cache_policy_id": "4135ea2d-6df8-44a3-9df3-4b5a84be39ad",
+                "cached_methods": [
+                  "GET",
+                  "HEAD"
+                ],
+                "compress": true,
+                "default_ttl": 0,
+                "field_level_encryption_id": "",
+                "forwarded_values": [],
+                "function_association": [],
+                "grpc_config": [
+                  {
+                    "enabled": false
+                  }
+                ],
+                "lambda_function_association": [],
+                "max_ttl": 0,
+                "min_ttl": 0,
+                "origin_request_policy_id": "b689b0a8-53d0-40ab-baf2-68738e2966ac",
+                "path_pattern": "/api/*",
+                "realtime_log_config_arn": "",
+                "response_headers_policy_id": "67f7725c-6f97-4210-82d7-5512b31e9d03",
+                "smooth_streaming": false,
+                "target_origin_id": "api",
+                "trusted_key_groups": null,
+                "trusted_signers": null,
+                "viewer_protocol_policy": "https-only"
+              }
+            ],
+            "origin": [
+              {
+                "connection_attempts": 3,
+                "connection_timeout": 10,
+                "custom_header": [],
+                "custom_origin_config": [
+                  {
+                    "http_port": 80,
+                    "https_port": 443,
+                    "origin_keepalive_timeout": 5,
+                    "origin_protocol_policy": "https-only",
+                    "origin_read_timeout": 30,
+                    "origin_ssl_protocols": [
+                      "TLSv1.2"
+                    ]
+                  }
+                ],
+                "domain_name": "b2mvv6mkae.execute-api.us-east-1.amazonaws.com",
+                "origin_access_control_id": "",
+                "origin_id": "api",
+                "origin_path": "",
+                "origin_shield": [],
+                "s3_origin_config": [],
+                "vpc_origin_config": []
+              },
+              {
+                "connection_attempts": 3,
+                "connection_timeout": 10,
+                "custom_header": [],
+                "custom_origin_config": [],
+                "domain_name": "exam-platform-prod-web-363242104805.s3.us-east-1.amazonaws.com",
+                "origin_access_control_id": "E1CDRXCSCIE57A",
+                "origin_id": "frontend",
+                "origin_path": "",
+                "origin_shield": [],
+                "s3_origin_config": [],
+                "vpc_origin_config": []
+              }
+            ],
+            "origin_group": [],
+            "price_class": "PriceClass_100",
+            "restrictions": [
+              {
+                "geo_restriction": [
+                  {
+                    "locations": [],
+                    "restriction_type": "none"
+                  }
+                ]
+              }
+            ],
+            "retain_on_delete": false,
+            "staging": false,
+            "status": "Deployed",
+            "tags": null,
+            "tags_all": {
+              "Environment": "prod",
+              "ManagedBy": "terraform",
+              "Project": "exam-platform"
+            },
+            "trusted_key_groups": [
+              {
+                "enabled": false,
+                "items": []
+              }
+            ],
+            "trusted_signers": [
+              {
+                "enabled": false,
+                "items": []
+              }
+            ],
+            "viewer_certificate": [
+              {
+                "acm_certificate_arn": "",
+                "cloudfront_default_certificate": true,
+                "iam_certificate_id": "",
+                "minimum_protocol_version": "TLSv1",
+                "ssl_support_method": ""
+              }
+            ],
+            "wait_for_deployment": true,
+            "web_acl_id": "arn:aws:wafv2:us-east-1:363242104805:global/webacl/exam-platform-prod-waf/662f13e6-75db-4a32-97ec-cb974d4c926b"
+          },
+          "sensitive_attributes": [],
+          "identity_schema_version": 0,
+          "private": "eyJzY2hlbWFfdmVyc2lvbiI6IjEifQ==",
+          "dependencies": [
+            "aws_acm_certificate.main",
+            "aws_acm_certificate_validation.main",
+            "aws_apigatewayv2_api.main",
+            "aws_cloudfront_origin_access_control.frontend",
+            "aws_route53_record.cert_validation",
+            "aws_s3_bucket.frontend",
+            "aws_wafv2_web_acl.main",
+            "data.aws_caller_identity.current"
+          ]
+        }
+      ]
+    },
+    {
+      "mode": "managed",
+      "type": "aws_cloudfront_origin_access_control",
+      "name": "frontend",
+      "provider": "provider[\"registry.terraform.io/hashicorp/aws\"]",
+      "instances": [
+        {
+          "schema_version": 0,
+          "attributes": {
+            "arn": "arn:aws:cloudfront::363242104805:origin-access-control/E1CDRXCSCIE57A",
+            "description": "Managed by Terraform",
+            "etag": "ETVPDKIKX0DER",
+            "id": "E1CDRXCSCIE57A",
+            "name": "exam-platform-prod-oac",
+            "origin_access_control_origin_type": "s3",
+            "signing_behavior": "always",
+            "signing_protocol": "sigv4"
+          },
+          "sensitive_attributes": [],
+          "identity_schema_version": 0,
+          "private": "bnVsbA=="
+        }
+      ]
+    },
+    {
+      "mode": "managed",
+      "type": "aws_cloudtrail",
+      "name": "main",
+      "provider": "provider[\"registry.terraform.io/hashicorp/aws\"]",
+      "instances": [
+        {
+          "index_key": 0,
+          "schema_version": 1,
+          "attributes": {
+            "advanced_event_selector": [],
+            "arn": "arn:aws:cloudtrail:us-east-1:363242104805:trail/exam-platform-prod-trail",
+            "cloud_watch_logs_group_arn": "",
+            "cloud_watch_logs_role_arn": "",
+            "enable_log_file_validation": true,
+            "enable_logging": true,
+            "event_selector": [],
+            "home_region": "us-east-1",
+            "id": "arn:aws:cloudtrail:us-east-1:363242104805:trail/exam-platform-prod-trail",
+            "include_global_service_events": true,
+            "insight_selector": [],
+            "is_multi_region_trail": true,
+            "is_organization_trail": false,
+            "kms_key_id": "",
+            "name": "exam-platform-prod-trail",
+            "s3_bucket_name": "exam-platform-prod-trail-363242104805",
+            "s3_key_prefix": "",
+            "sns_topic_arn": "",
+            "sns_topic_name": "",
+            "tags": null,
+            "tags_all": {
+              "Environment": "prod",
+              "ManagedBy": "terraform",
+              "Project": "exam-platform"
+            }
+          },
+          "sensitive_attributes": [],
+          "identity_schema_version": 0,
+          "private": "eyJzY2hlbWFfdmVyc2lvbiI6IjEifQ==",
+          "dependencies": [
+            "aws_s3_bucket.trail",
+            "aws_s3_bucket_policy.trail",
+            "data.aws_caller_identity.current"
+          ]
+        }
+      ]
+    },
+    {
+      "mode": "managed",
+      "type": "aws_cloudwatch_event_rule",
+      "name": "auto_submit",
+      "provider": "provider[\"registry.terraform.io/hashicorp/aws\"]",
+      "instances": [
+        {
+          "schema_version": 1,
+          "attributes": {
+            "arn": "arn:aws:events:us-east-1:363242104805:rule/exam-platform-prod-auto-submit",
+            "description": "",
+            "event_bus_name": "default",
+            "event_pattern": null,
+            "force_destroy": false,
+            "id": "exam-platform-prod-auto-submit",
+            "is_enabled": true,
+            "name": "exam-platform-prod-auto-submit",
+            "name_prefix": "",
+            "role_arn": "",
+            "schedule_expression": "rate(1 minute)",
+            "state": "ENABLED",
+            "tags": null,
+            "tags_all": {
+              "Environment": "prod",
+              "ManagedBy": "terraform",
+              "Project": "exam-platform"
+            }
+          },
+          "sensitive_attributes": [],
+          "identity_schema_version": 0,
+          "private": "eyJzY2hlbWFfdmVyc2lvbiI6IjEifQ=="
+        }
+      ]
+    },
+    {
+      "mode": "managed",
+      "type": "aws_cloudwatch_log_group",
+      "name": "api",
+      "provider": "provider[\"registry.terraform.io/hashicorp/aws\"]",
+      "instances": [
+        {
+          "schema_version": 0,
+          "attributes": {
+            "arn": "arn:aws:logs:us-east-1:363242104805:log-group:/aws/apigateway/exam-platform-prod",
+            "id": "/aws/apigateway/exam-platform-prod",
+            "kms_key_id": "",
+            "log_group_class": "STANDARD",
+            "name": "/aws/apigateway/exam-platform-prod",
+            "name_prefix": "",
+            "retention_in_days": 90,
+            "skip_destroy": false,
+            "tags": null,
+            "tags_all": {
+              "Environment": "prod",
+              "ManagedBy": "terraform",
+              "Project": "exam-platform"
+            }
+          },
+          "sensitive_attributes": [],
+          "identity_schema_version": 0,
+          "private": "bnVsbA=="
+        }
+      ]
+    },
+    {
+      "mode": "managed",
+      "type": "aws_cloudwatch_metric_alarm",
+      "name": "api_5xx",
+      "provider": "provider[\"registry.terraform.io/hashicorp/aws\"]",
+      "instances": [
+        {
+          "schema_version": 1,
+          "attributes": {
+            "actions_enabled": true,
+            "alarm_actions": [
+              "arn:aws:sns:us-east-1:363242104805:exam-platform-prod-alarms"
+            ],
+            "alarm_description": "API returning server errors - exams may be affected",
+            "alarm_name": "exam-platform-prod-api-5xx",
+            "arn": "arn:aws:cloudwatch:us-east-1:363242104805:alarm:exam-platform-prod-api-5xx",
+            "comparison_operator": "GreaterThanThreshold",
+            "datapoints_to_alarm": 0,
+            "dimensions": {
+              "ApiId": "b2mvv6mkae"
+            },
+            "evaluate_low_sample_count_percentiles": "",
+            "evaluation_periods": 3,
+            "extended_statistic": "",
+            "id": "exam-platform-prod-api-5xx",
+            "insufficient_data_actions": null,
+            "metric_name": "5xx",
+            "metric_query": [],
+            "namespace": "AWS/ApiGateway",
+            "ok_actions": null,
+            "period": 60,
+            "statistic": "Sum",
+            "tags": null,
+            "tags_all": {
+              "Environment": "prod",
+              "ManagedBy": "terraform",
+              "Project": "exam-platform"
+            },
+            "threshold": 10,
+            "threshold_metric_id": "",
+            "treat_missing_data": "notBreaching",
+            "unit": ""
+          },
+          "sensitive_attributes": [],
+          "identity_schema_version": 0,
+          "private": "eyJzY2hlbWFfdmVyc2lvbiI6IjEifQ==",
+          "dependencies": [
+            "aws_apigatewayv2_api.main",
+            "aws_sns_topic.alarms"
+          ]
+        }
+      ]
+    },
+    {
+      "mode": "managed",
+      "type": "aws_cloudwatch_metric_alarm",
+      "name": "api_latency",
+      "provider": "provider[\"registry.terraform.io/hashicorp/aws\"]",
+      "instances": [
+        {
+          "schema_version": 1,
+          "attributes": {
+            "actions_enabled": true,
+            "alarm_actions": [
+              "arn:aws:sns:us-east-1:363242104805:exam-platform-prod-alarms"
+            ],
+            "alarm_description": "Autosave/start latency high (p95 \u003e 1s)",
+            "alarm_name": "exam-platform-prod-api-p95-latency",
+            "arn": "arn:aws:cloudwatch:us-east-1:363242104805:alarm:exam-platform-prod-api-p95-latency",
+            "comparison_operator": "GreaterThanThreshold",
+            "datapoints_to_alarm": 0,
+            "dimensions": {
+              "ApiId": "b2mvv6mkae"
+            },
+            "evaluate_low_sample_count_percentiles": "",
+            "evaluation_periods": 5,
+            "extended_statistic": "p95",
+            "id": "exam-platform-prod-api-p95-latency",
+            "insufficient_data_actions": null,
+            "metric_name": "Latency",
+            "metric_query": [],
+            "namespace": "AWS/ApiGateway",
+            "ok_actions": null,
+            "period": 60,
+            "statistic": "",
+            "tags": null,
+            "tags_all": {
+              "Environment": "prod",
+              "ManagedBy": "terraform",
+              "Project": "exam-platform"
+            },
+            "threshold": 1000,
+            "threshold_metric_id": "",
+            "treat_missing_data": "notBreaching",
+            "unit": ""
+          },
+          "sensitive_attributes": [],
+          "identity_schema_version": 0,
+          "private": "eyJzY2hlbWFfdmVyc2lvbiI6IjEifQ==",
+          "dependencies": [
+            "aws_apigatewayv2_api.main",
+            "aws_sns_topic.alarms"
+          ]
+        }
+      ]
+    },
+    {
+      "mode": "managed",
+      "type": "aws_cloudwatch_metric_alarm",
+      "name": "dlq",
+      "provider": "provider[\"registry.terraform.io/hashicorp/aws\"]",
+      "instances": [
+        {
+          "index_key": "marking",
+          "schema_version": 1,
+          "attributes": {
+            "actions_enabled": true,
+            "alarm_actions": [
+              "arn:aws:sns:us-east-1:363242104805:exam-platform-prod-alarms"
+            ],
+            "alarm_description": "Messages failed processing 5 times (marking)",
+            "alarm_name": "exam-platform-prod-marking-dlq-not-empty",
+            "arn": "arn:aws:cloudwatch:us-east-1:363242104805:alarm:exam-platform-prod-marking-dlq-not-empty",
+            "comparison_operator": "GreaterThanThreshold",
+            "datapoints_to_alarm": 0,
+            "dimensions": {
+              "QueueName": "exam-platform-prod-marking-dlq"
+            },
+            "evaluate_low_sample_count_percentiles": "",
+            "evaluation_periods": 1,
+            "extended_statistic": "",
+            "id": "exam-platform-prod-marking-dlq-not-empty",
+            "insufficient_data_actions": null,
+            "metric_name": "ApproximateNumberOfMessagesVisible",
+            "metric_query": [],
+            "namespace": "AWS/SQS",
+            "ok_actions": null,
+            "period": 60,
+            "statistic": "Maximum",
+            "tags": null,
+            "tags_all": {
+              "Environment": "prod",
+              "ManagedBy": "terraform",
+              "Project": "exam-platform"
+            },
+            "threshold": 0,
+            "threshold_metric_id": "",
+            "treat_missing_data": "notBreaching",
+            "unit": ""
+          },
+          "sensitive_attributes": [],
+          "identity_schema_version": 0,
+          "private": "eyJzY2hlbWFfdmVyc2lvbiI6IjEifQ==",
+          "dependencies": [
+            "aws_sns_topic.alarms",
+            "aws_sqs_queue.dlq"
+          ]
+        },
+        {
+          "index_key": "notify",
+          "schema_version": 1,
+          "attributes": {
+            "actions_enabled": true,
+            "alarm_actions": [
+              "arn:aws:sns:us-east-1:363242104805:exam-platform-prod-alarms"
+            ],
+            "alarm_description": "Messages failed processing 5 times (notify)",
+            "alarm_name": "exam-platform-prod-notify-dlq-not-empty",
+            "arn": "arn:aws:cloudwatch:us-east-1:363242104805:alarm:exam-platform-prod-notify-dlq-not-empty",
+            "comparison_operator": "GreaterThanThreshold",
+            "datapoints_to_alarm": 0,
+            "dimensions": {
+              "QueueName": "exam-platform-prod-notify-dlq"
+            },
+            "evaluate_low_sample_count_percentiles": "",
+            "evaluation_periods": 1,
+            "extended_statistic": "",
+            "id": "exam-platform-prod-notify-dlq-not-empty",
+            "insufficient_data_actions": null,
+            "metric_name": "ApproximateNumberOfMessagesVisible",
+            "metric_query": [],
+            "namespace": "AWS/SQS",
+            "ok_actions": null,
+            "period": 60,
+            "statistic": "Maximum",
+            "tags": null,
+            "tags_all": {
+              "Environment": "prod",
+              "ManagedBy": "terraform",
+              "Project": "exam-platform"
+            },
+            "threshold": 0,
+            "threshold_metric_id": "",
+            "treat_missing_data": "notBreaching",
+            "unit": ""
+          },
+          "sensitive_attributes": [],
+          "identity_schema_version": 0,
+          "private": "eyJzY2hlbWFfdmVyc2lvbiI6IjEifQ==",
+          "dependencies": [
+            "aws_sns_topic.alarms",
+            "aws_sqs_queue.dlq"
+          ]
+        },
+        {
+          "index_key": "uploads",
+          "schema_version": 1,
+          "attributes": {
+            "actions_enabled": true,
+            "alarm_actions": [
+              "arn:aws:sns:us-east-1:363242104805:exam-platform-prod-alarms"
+            ],
+            "alarm_description": "Messages failed processing 5 times (uploads)",
+            "alarm_name": "exam-platform-prod-uploads-dlq-not-empty",
+            "arn": "arn:aws:cloudwatch:us-east-1:363242104805:alarm:exam-platform-prod-uploads-dlq-not-empty",
+            "comparison_operator": "GreaterThanThreshold",
+            "datapoints_to_alarm": 0,
+            "dimensions": {
+              "QueueName": "exam-platform-prod-uploads-dlq"
+            },
+            "evaluate_low_sample_count_percentiles": "",
+            "evaluation_periods": 1,
+            "extended_statistic": "",
+            "id": "exam-platform-prod-uploads-dlq-not-empty",
+            "insufficient_data_actions": null,
+            "metric_name": "ApproximateNumberOfMessagesVisible",
+            "metric_query": [],
+            "namespace": "AWS/SQS",
+            "ok_actions": null,
+            "period": 60,
+            "statistic": "Maximum",
+            "tags": null,
+            "tags_all": {
+              "Environment": "prod",
+              "ManagedBy": "terraform",
+              "Project": "exam-platform"
+            },
+            "threshold": 0,
+            "threshold_metric_id": "",
+            "treat_missing_data": "notBreaching",
+            "unit": ""
+          },
+          "sensitive_attributes": [],
+          "identity_schema_version": 0,
+          "private": "eyJzY2hlbWFfdmVyc2lvbiI6IjEifQ==",
+          "dependencies": [
+            "aws_sns_topic.alarms",
+            "aws_sqs_queue.dlq"
+          ]
+        }
+      ]
+    },
+    {
+      "mode": "managed",
+      "type": "aws_db_instance",
+      "name": "main",
+      "provider": "provider[\"registry.terraform.io/hashicorp/aws\"]",
+      "instances": []
+    },
+    {
+      "mode": "managed",
+      "type": "aws_db_parameter_group",
+      "name": "pg16",
+      "provider": "provider[\"registry.terraform.io/hashicorp/aws\"]",
+      "instances": [
+        {
+          "schema_version": 0,
+          "attributes": {
+            "arn": "arn:aws:rds:us-east-1:363242104805:pg:exam-platform-prod-pg16",
+            "description": "Managed by Terraform",
+            "family": "postgres16",
+            "id": "exam-platform-prod-pg16",
+            "name": "exam-platform-prod-pg16",
+            "name_prefix": "",
+            "parameter": [
+              {
+                "apply_method": "immediate",
+                "name": "log_min_duration_statement",
+                "value": "500"
+              },
+              {
+                "apply_method": "immediate",
+                "name": "rds.force_ssl",
+                "value": "1"
+              }
+            ],
+            "skip_destroy": false,
+            "tags": null,
+            "tags_all": {
+              "Environment": "prod",
+              "ManagedBy": "terraform",
+              "Project": "exam-platform"
+            }
+          },
+          "sensitive_attributes": [],
+          "identity_schema_version": 0,
+          "private": "bnVsbA=="
+        }
+      ]
+    },
+    {
+      "mode": "managed",
+      "type": "aws_db_subnet_group",
+      "name": "main",
+      "provider": "provider[\"registry.terraform.io/hashicorp/aws\"]",
+      "instances": [
+        {
+          "schema_version": 0,
+          "attributes": {
+            "arn": "arn:aws:rds:us-east-1:363242104805:subgrp:exam-platform-prod-db",
+            "description": "Managed by Terraform",
+            "id": "exam-platform-prod-db",
+            "name": "exam-platform-prod-db",
+            "name_prefix": "",
+            "subnet_ids": [
+              "subnet-021d631272c274034",
+              "subnet-02df6122004f455a4"
+            ],
+            "supported_network_types": [
+              "IPV4"
+            ],
+            "tags": null,
+            "tags_all": {
+              "Environment": "prod",
+              "ManagedBy": "terraform",
+              "Project": "exam-platform"
+            },
+            "vpc_id": "vpc-0620110922ee993b6"
+          },
+          "sensitive_attributes": [],
+          "identity_schema_version": 0,
+          "private": "bnVsbA==",
+          "dependencies": [
+            "aws_subnet.data",
+            "aws_vpc.main",
+            "data.aws_availability_zones.available"
+          ]
+        }
+      ]
+    },
+    {
+      "mode": "managed",
+      "type": "aws_eip",
+      "name": "nat",
+      "provider": "provider[\"registry.terraform.io/hashicorp/aws\"]",
+      "instances": [
+        {
+          "index_key": 0,
+          "schema_version": 0,
+          "attributes": {
+            "address": null,
+            "allocation_id": "eipalloc-095239407dbd67e0a",
+            "arn": "arn:aws:ec2:us-east-1:363242104805:elastic-ip/eipalloc-095239407dbd67e0a",
+            "associate_with_private_ip": null,
+            "association_id": "",
+            "carrier_ip": "",
+            "customer_owned_ip": "",
+            "customer_owned_ipv4_pool": "",
+            "domain": "vpc",
+            "id": "eipalloc-095239407dbd67e0a",
+            "instance": "",
+            "ipam_pool_id": null,
+            "network_border_group": "us-east-1",
+            "network_interface": "",
+            "private_dns": null,
+            "private_ip": "",
+            "ptr_record": "",
+            "public_dns": "ec2-100-29-254-216.compute-1.amazonaws.com",
+            "public_ip": "100.29.254.216",
+            "public_ipv4_pool": "amazon",
+            "tags": {
+              "Name": "exam-platform-prod-nat-eip-0"
+            },
+            "tags_all": {
+              "Environment": "prod",
+              "ManagedBy": "terraform",
+              "Name": "exam-platform-prod-nat-eip-0",
+              "Project": "exam-platform"
+            },
+            "timeouts": null,
+            "vpc": true
+          },
+          "sensitive_attributes": [],
+          "identity_schema_version": 0,
+          "private": "eyJlMmJmYjczMC1lY2FhLTExZTYtOGY4OC0zNDM2M2JjN2M0YzAiOnsiZGVsZXRlIjoxODAwMDAwMDAwMDAsInJlYWQiOjkwMDAwMDAwMDAwMCwidXBkYXRlIjozMDAwMDAwMDAwMDB9fQ=="
+        },
+        {
+          "index_key": 1,
+          "schema_version": 0,
+          "attributes": {
+            "address": null,
+            "allocation_id": "eipalloc-08dd11d477efc2695",
+            "arn": "arn:aws:ec2:us-east-1:363242104805:elastic-ip/eipalloc-08dd11d477efc2695",
+            "associate_with_private_ip": null,
+            "association_id": "",
+            "carrier_ip": "",
+            "customer_owned_ip": "",
+            "customer_owned_ipv4_pool": "",
+            "domain": "vpc",
+            "id": "eipalloc-08dd11d477efc2695",
+            "instance": "",
+            "ipam_pool_id": null,
+            "network_border_group": "us-east-1",
+            "network_interface": "",
+            "private_dns": null,
+            "private_ip": "",
+            "ptr_record": "",
+            "public_dns": "ec2-34-196-168-130.compute-1.amazonaws.com",
+            "public_ip": "34.196.168.130",
+            "public_ipv4_pool": "amazon",
+            "tags": {
+              "Name": "exam-platform-prod-nat-eip-1"
+            },
+            "tags_all": {
+              "Environment": "prod",
+              "ManagedBy": "terraform",
+              "Name": "exam-platform-prod-nat-eip-1",
+              "Project": "exam-platform"
+            },
+            "timeouts": null,
+            "vpc": true
+          },
+          "sensitive_attributes": [],
+          "identity_schema_version": 0,
+          "private": "eyJlMmJmYjczMC1lY2FhLTExZTYtOGY4OC0zNDM2M2JjN2M0YzAiOnsiZGVsZXRlIjoxODAwMDAwMDAwMDAsInJlYWQiOjkwMDAwMDAwMDAwMCwidXBkYXRlIjozMDAwMDAwMDAwMDB9fQ=="
+        }
+      ]
+    },
+    {
+      "mode": "managed",
+      "type": "aws_iam_role",
+      "name": "backup",
+      "provider": "provider[\"registry.terraform.io/hashicorp/aws\"]",
+      "instances": [
+        {
+          "schema_version": 0,
+          "attributes": {
+            "arn": "arn:aws:iam::363242104805:role/exam-platform-prod-backup",
+            "assume_role_policy": "{\"Statement\":[{\"Action\":\"sts:AssumeRole\",\"Effect\":\"Allow\",\"Principal\":{\"Service\":\"backup.amazonaws.com\"}}],\"Version\":\"2012-10-17\"}",
+            "create_date": "2026-11-19T06:55:01Z",
+            "description": "",
+            "force_detach_policies": false,
+            "id": "exam-platform-prod-backup",
+            "inline_policy": [],
+            "managed_policy_arns": [],
+            "max_session_duration": 3600,
+            "name": "exam-platform-prod-backup",
+            "name_prefix": "",
+            "path": "/",
+            "permissions_boundary": "",
+            "tags": null,
+            "tags_all": {
+              "Environment": "prod",
+              "ManagedBy": "terraform",
+              "Project": "exam-platform"
+            },
+            "unique_id": "AROAVJEXKU7SRF3SXBQKQ"
+          },
+          "sensitive_attributes": [],
+          "identity_schema_version": 0,
+          "private": "bnVsbA=="
+        }
+      ]
+    },
+    {
+      "mode": "managed",
+      "type": "aws_iam_role",
+      "name": "rds_proxy",
+      "provider": "provider[\"registry.terraform.io/hashicorp/aws\"]",
+      "instances": [
+        {
+          "schema_version": 0,
+          "attributes": {
+            "arn": "arn:aws:iam::363242104805:role/exam-platform-prod-rds-proxy",
+            "assume_role_policy": "{\"Statement\":[{\"Action\":\"sts:AssumeRole\",\"Effect\":\"Allow\",\"Principal\":{\"Service\":\"rds.amazonaws.com\"}}],\"Version\":\"2012-10-17\"}",
+            "create_date": "2026-11-19T06:55:01Z",
+            "description": "",
+            "force_detach_policies": false,
+            "id": "exam-platform-prod-rds-proxy",
+            "inline_policy": [],
+            "managed_policy_arns": [],
+            "max_session_duration": 3600,
+            "name": "exam-platform-prod-rds-proxy",
+            "name_prefix": "",
+            "path": "/",
+            "permissions_boundary": "",
+            "tags": null,
+            "tags_all": {
+              "Environment": "prod",
+              "ManagedBy": "terraform",
+              "Project": "exam-platform"
+            },
+            "unique_id": "AROAVJEXKU7SUIQZVQZND"
+          },
+          "sensitive_attributes": [],
+          "identity_schema_version": 0,
+          "private": "bnVsbA=="
+        }
+      ]
+    },
+    {
+      "mode": "managed",
+      "type": "aws_iam_role_policy_attachment",
+      "name": "backup",
+      "provider": "provider[\"registry.terraform.io/hashicorp/aws\"]",
+      "instances": [
+        {
+          "schema_version": 0,
+          "attributes": {
+            "id": "exam-platform-prod-backup-20261119065503899300000002",
+            "policy_arn": "arn:aws:iam::aws:policy/service-role/AWSBackupServiceRolePolicyForBackup",
+            "role": "exam-platform-prod-backup"
+          },
+          "sensitive_attributes": [],
+          "identity_schema_version": 0,
+          "private": "bnVsbA==",
+          "dependencies": [
+            "aws_iam_role.backup"
+          ]
+        }
+      ]
+    },
+    {
+      "mode": "managed",
+      "type": "aws_iam_role_policy_attachment",
+      "name": "backup_restore",
+      "provider": "provider[\"registry.terraform.io/hashicorp/aws\"]",
+      "instances": [
+        {
+          "schema_version": 0,
+          "attributes": {
+            "id": "exam-platform-prod-backup-20261119065503801900000001",
+            "policy_arn": "arn:aws:iam::aws:policy/service-role/AWSBackupServiceRolePolicyForRestores",
+            "role": "exam-platform-prod-backup"
+          },
+          "sensitive_attributes": [],
+          "identity_schema_version": 0,
+          "private": "bnVsbA==",
+          "dependencies": [
+            "aws_iam_role.backup"
+          ]
+        }
+      ]
+    },
+    {
+      "mode": "managed",
+      "type": "aws_internet_gateway",
+      "name": "main",
+      "provider": "provider[\"registry.terraform.io/hashicorp/aws\"]",
+      "instances": [
+        {
+          "schema_version": 0,
+          "attributes": {
+            "arn": "arn:aws:ec2:us-east-1:363242104805:internet-gateway/igw-05f8160b9bfb5c82b",
+            "id": "igw-05f8160b9bfb5c82b",
+            "owner_id": "363242104805",
+            "tags": {
+              "Name": "exam-platform-prod-igw"
+            },
+            "tags_all": {
+              "Environment": "prod",
+              "ManagedBy": "terraform",
+              "Name": "exam-platform-prod-igw",
+              "Project": "exam-platform"
+            },
+            "timeouts": null,
+            "vpc_id": "vpc-0620110922ee993b6"
+          },
+          "sensitive_attributes": [],
+          "identity_schema_version": 0,
+          "private": "eyJlMmJmYjczMC1lY2FhLTExZTYtOGY4OC0zNDM2M2JjN2M0YzAiOnsiY3JlYXRlIjoxMjAwMDAwMDAwMDAwLCJkZWxldGUiOjEyMDAwMDAwMDAwMDAsInVwZGF0ZSI6MTIwMDAwMDAwMDAwMH19",
+          "dependencies": [
+            "aws_vpc.main"
+          ]
+        }
+      ]
+    },
+    {
+      "mode": "managed",
+      "type": "aws_kms_alias",
+      "name": "main",
+      "provider": "provider[\"registry.terraform.io/hashicorp/aws\"]",
+      "instances": [
+        {
+          "schema_version": 0,
+          "attributes": {
+            "arn": "arn:aws:kms:us-east-1:363242104805:alias/exam-platform-prod",
+            "id": "alias/exam-platform-prod",
+            "name": "alias/exam-platform-prod",
+            "name_prefix": "",
+            "target_key_arn": "arn:aws:kms:us-east-1:363242104805:key/a99cc916-c4f2-499c-a61d-ff859a2c5b8d",
+            "target_key_id": "a99cc916-c4f2-499c-a61d-ff859a2c5b8d"
+          },
+          "sensitive_attributes": [],
+          "identity_schema_version": 0,
+          "private": "bnVsbA==",
+          "dependencies": [
+            "aws_kms_key.main"
+          ]
+        }
+      ]
+    },
+    {
+      "mode": "managed",
+      "type": "aws_kms_key",
+      "name": "main",
+      "provider": "provider[\"registry.terraform.io/hashicorp/aws\"]",
+      "instances": [
+        {
+          "schema_version": 0,
+          "attributes": {
+            "arn": "arn:aws:kms:us-east-1:363242104805:key/a99cc916-c4f2-499c-a61d-ff859a2c5b8d",
+            "bypass_policy_lockout_safety_check": false,
+            "custom_key_store_id": "",
+            "customer_master_key_spec": "SYMMETRIC_DEFAULT",
+            "deletion_window_in_days": 7,
+            "description": "exam-platform-prod data encryption key",
+            "enable_key_rotation": true,
+            "id": "a99cc916-c4f2-499c-a61d-ff859a2c5b8d",
+            "is_enabled": true,
+            "key_id": "a99cc916-c4f2-499c-a61d-ff859a2c5b8d",
+            "key_usage": "ENCRYPT_DECRYPT",
+            "multi_region": false,
+            "policy": "{\"Id\":\"key-default-1\",\"Statement\":[{\"Action\":\"kms:*\",\"Effect\":\"Allow\",\"Principal\":{\"AWS\":\"arn:aws:iam::363242104805:root\"},\"Resource\":\"*\",\"Sid\":\"Enable IAM User Permissions\"}],\"Version\":\"2012-10-17\"}",
+            "rotation_period_in_days": 365,
+            "tags": null,
+            "tags_all": {
+              "Environment": "prod",
+              "ManagedBy": "terraform",
+              "Project": "exam-platform"
+            },
+            "timeouts": null,
+            "xks_key_id": ""
+          },
+          "sensitive_attributes": [],
+          "identity_schema_version": 0,
+          "private": "eyJlMmJmYjczMC1lY2FhLTExZTYtOGY4OC0zNDM2M2JjN2M0YzAiOnsiY3JlYXRlIjoxMjAwMDAwMDAwMDB9fQ=="
+        }
+      ]
+    },
+    {
+      "mode": "managed",
+      "type": "aws_nat_gateway",
+      "name": "main",
+      "provider": "provider[\"registry.terraform.io/hashicorp/aws\"]",
+      "instances": [
+        {
+          "index_key": 0,
+          "schema_version": 0,
+          "attributes": {
+            "allocation_id": "eipalloc-095239407dbd67e0a",
+            "association_id": "eipassoc-00e45d42c6f229c13",
+            "connectivity_type": "public",
+            "id": "nat-00f7851be440087cb",
+            "network_interface_id": "eni-0b58343c2f1fe6ace",
+            "private_ip": "10.20.0.67",
+            "public_ip": "100.29.254.216",
+            "secondary_allocation_ids": null,
+            "secondary_private_ip_address_count": 0,
+            "secondary_private_ip_addresses": [],
+            "subnet_id": "subnet-0fd378457483eab51",
+            "tags": {
+              "Name": "exam-platform-prod-nat-us-east-1a"
+            },
+            "tags_all": {
+              "Environment": "prod",
+              "ManagedBy": "terraform",
+              "Name": "exam-platform-prod-nat-us-east-1a",
+              "Project": "exam-platform"
+            },
+            "timeouts": null
+          },
+          "sensitive_attributes": [],
+          "identity_schema_version": 0,
+          "private": "eyJlMmJmYjczMC1lY2FhLTExZTYtOGY4OC0zNDM2M2JjN2M0YzAiOnsiY3JlYXRlIjo2MDAwMDAwMDAwMDAsImRlbGV0ZSI6MTgwMDAwMDAwMDAwMCwidXBkYXRlIjo2MDAwMDAwMDAwMDB9fQ==",
+          "dependencies": [
+            "aws_eip.nat",
+            "aws_internet_gateway.main",
+            "aws_subnet.public",
+            "aws_vpc.main",
+            "data.aws_availability_zones.available"
+          ]
+        },
+        {
+          "index_key": 1,
+          "schema_version": 0,
+          "attributes": {
+            "allocation_id": "eipalloc-08dd11d477efc2695",
+            "association_id": "eipassoc-0decf615d2d925a45",
+            "connectivity_type": "public",
+            "id": "nat-02544cfd0cdff4457",
+            "network_interface_id": "eni-0133b70df55f207f1",
+            "private_ip": "10.20.1.206",
+            "public_ip": "34.196.168.130",
+            "secondary_allocation_ids": null,
+            "secondary_private_ip_address_count": 0,
+            "secondary_private_ip_addresses": [],
+            "subnet_id": "subnet-024efe5099ea27228",
+            "tags": {
+              "Name": "exam-platform-prod-nat-us-east-1b"
+            },
+            "tags_all": {
+              "Environment": "prod",
+              "ManagedBy": "terraform",
+              "Name": "exam-platform-prod-nat-us-east-1b",
+              "Project": "exam-platform"
+            },
+            "timeouts": null
+          },
+          "sensitive_attributes": [],
+          "identity_schema_version": 0,
+          "private": "eyJlMmJmYjczMC1lY2FhLTExZTYtOGY4OC0zNDM2M2JjN2M0YzAiOnsiY3JlYXRlIjo2MDAwMDAwMDAwMDAsImRlbGV0ZSI6MTgwMDAwMDAwMDAwMCwidXBkYXRlIjo2MDAwMDAwMDAwMDB9fQ==",
+          "dependencies": [
+            "aws_eip.nat",
+            "aws_internet_gateway.main",
+            "aws_subnet.public",
+            "aws_vpc.main",
+            "data.aws_availability_zones.available"
+          ]
+        }
+      ]
+    },
+    {
+      "mode": "managed",
+      "type": "aws_route53_record",
+      "name": "cert_validation",
+      "provider": "provider[\"registry.terraform.io/hashicorp/aws\"]",
+      "instances": []
+    },
+    {
+      "mode": "managed",
+      "type": "aws_route_table",
+      "name": "private",
+      "provider": "provider[\"registry.terraform.io/hashicorp/aws\"]",
+      "instances": [
+        {
+          "index_key": 0,
+          "schema_version": 0,
+          "attributes": {
+            "arn": "arn:aws:ec2:us-east-1:363242104805:route-table/rtb-08aee4789a0046e87",
+            "id": "rtb-08aee4789a0046e87",
+            "owner_id": "363242104805",
+            "propagating_vgws": [],
+            "route": [
+              {
+                "carrier_gateway_id": "",
+                "cidr_block": "0.0.0.0/0",
+                "core_network_arn": "",
+                "destination_prefix_list_id": "",
+                "egress_only_gateway_id": "",
+                "gateway_id": "",
+                "ipv6_cidr_block": "",
+                "local_gateway_id": "",
+                "nat_gateway_id": "nat-00f7851be440087cb",
+                "network_interface_id": "",
+                "transit_gateway_id": "",
+                "vpc_endpoint_id": "",
+                "vpc_peering_connection_id": ""
+              }
+            ],
+            "tags": {
+              "Name": "exam-platform-prod-private-rt-us-east-1a"
+            },
+            "tags_all": {
+              "Environment": "prod",
+              "ManagedBy": "terraform",
+              "Name": "exam-platform-prod-private-rt-us-east-1a",
+              "Project": "exam-platform"
+            },
+            "timeouts": null,
+            "vpc_id": "vpc-0620110922ee993b6"
+          },
+          "sensitive_attributes": [],
+          "identity_schema_version": 0,
+          "private": "eyJlMmJmYjczMC1lY2FhLTExZTYtOGY4OC0zNDM2M2JjN2M0YzAiOnsiY3JlYXRlIjozMDAwMDAwMDAwMDAsImRlbGV0ZSI6MzAwMDAwMDAwMDAwLCJ1cGRhdGUiOjEyMDAwMDAwMDAwMH19",
+          "dependencies": [
+            "aws_eip.nat",
+            "aws_internet_gateway.main",
+            "aws_nat_gateway.main",
+            "aws_subnet.public",
+            "aws_vpc.main",
+            "data.aws_availability_zones.available"
+          ]
+        },
+        {
+          "index_key": 1,
+          "schema_version": 0,
+          "attributes": {
+            "arn": "arn:aws:ec2:us-east-1:363242104805:route-table/rtb-032bb3f817b714dcd",
+            "id": "rtb-032bb3f817b714dcd",
+            "owner_id": "363242104805",
+            "propagating_vgws": [],
+            "route": [
+              {
+                "carrier_gateway_id": "",
+                "cidr_block": "0.0.0.0/0",
+                "core_network_arn": "",
+                "destination_prefix_list_id": "",
+                "egress_only_gateway_id": "",
+                "gateway_id": "",
+                "ipv6_cidr_block": "",
+                "local_gateway_id": "",
+                "nat_gateway_id": "nat-02544cfd0cdff4457",
+                "network_interface_id": "",
+                "transit_gateway_id": "",
+                "vpc_endpoint_id": "",
+                "vpc_peering_connection_id": ""
+              }
+            ],
+            "tags": {
+              "Name": "exam-platform-prod-private-rt-us-east-1b"
+            },
+            "tags_all": {
+              "Environment": "prod",
+              "ManagedBy": "terraform",
+              "Name": "exam-platform-prod-private-rt-us-east-1b",
+              "Project": "exam-platform"
+            },
+            "timeouts": null,
+            "vpc_id": "vpc-0620110922ee993b6"
+          },
+          "sensitive_attributes": [],
+          "identity_schema_version": 0,
+          "private": "eyJlMmJmYjczMC1lY2FhLTExZTYtOGY4OC0zNDM2M2JjN2M0YzAiOnsiY3JlYXRlIjozMDAwMDAwMDAwMDAsImRlbGV0ZSI6MzAwMDAwMDAwMDAwLCJ1cGRhdGUiOjEyMDAwMDAwMDAwMH19",
+          "dependencies": [
+            "aws_eip.nat",
+            "aws_internet_gateway.main",
+            "aws_nat_gateway.main",
+            "aws_subnet.public",
+            "aws_vpc.main",
+            "data.aws_availability_zones.available"
+          ]
+        }
+      ]
+    },
+    {
+      "mode": "managed",
+      "type": "aws_route_table",
+      "name": "public",
+      "provider": "provider[\"registry.terraform.io/hashicorp/aws\"]",
+      "instances": [
+        {
+          "schema_version": 0,
+          "attributes": {
+            "arn": "arn:aws:ec2:us-east-1:363242104805:route-table/rtb-0dd76635b036ac63b",
+            "id": "rtb-0dd76635b036ac63b",
+            "owner_id": "363242104805",
+            "propagating_vgws": [],
+            "route": [
+              {
+                "carrier_gateway_id": "",
+                "cidr_block": "0.0.0.0/0",
+                "core_network_arn": "",
+                "destination_prefix_list_id": "",
+                "egress_only_gateway_id": "",
+                "gateway_id": "igw-05f8160b9bfb5c82b",
+                "ipv6_cidr_block": "",
+                "local_gateway_id": "",
+                "nat_gateway_id": "",
+                "network_interface_id": "",
+                "transit_gateway_id": "",
+                "vpc_endpoint_id": "",
+                "vpc_peering_connection_id": ""
+              }
+            ],
+            "tags": {
+              "Name": "exam-platform-prod-public-rt"
+            },
+            "tags_all": {
+              "Environment": "prod",
+              "ManagedBy": "terraform",
+              "Name": "exam-platform-prod-public-rt",
+              "Project": "exam-platform"
+            },
+            "timeouts": null,
+            "vpc_id": "vpc-0620110922ee993b6"
+          },
+          "sensitive_attributes": [],
+          "identity_schema_version": 0,
+          "private": "eyJlMmJmYjczMC1lY2FhLTExZTYtOGY4OC0zNDM2M2JjN2M0YzAiOnsiY3JlYXRlIjozMDAwMDAwMDAwMDAsImRlbGV0ZSI6MzAwMDAwMDAwMDAwLCJ1cGRhdGUiOjEyMDAwMDAwMDAwMH19",
+          "dependencies": [
+            "aws_internet_gateway.main",
+            "aws_vpc.main"
+          ]
+        }
+      ]
+    },
+    {
+      "mode": "managed",
+      "type": "aws_route_table_association",
+      "name": "app",
+      "provider": "provider[\"registry.terraform.io/hashicorp/aws\"]",
+      "instances": [
+        {
+          "index_key": 0,
+          "schema_version": 0,
+          "attributes": {
+            "gateway_id": "",
+            "id": "rtbassoc-08b8eb83ddf7c535f",
+            "route_table_id": "rtb-08aee4789a0046e87",
+            "subnet_id": "subnet-0b35ffbef00b8ea72",
+            "timeouts": null
+          },
+          "sensitive_attributes": [],
+          "identity_schema_version": 0,
+          "private": "eyJlMmJmYjczMC1lY2FhLTExZTYtOGY4OC0zNDM2M2JjN2M0YzAiOnsiY3JlYXRlIjozMDAwMDAwMDAwMDAsImRlbGV0ZSI6MzAwMDAwMDAwMDAwLCJ1cGRhdGUiOjEyMDAwMDAwMDAwMH19",
+          "dependencies": [
+            "aws_eip.nat",
+            "aws_internet_gateway.main",
+            "aws_nat_gateway.main",
+            "aws_route_table.private",
+            "aws_subnet.app",
+            "aws_subnet.public",
+            "aws_vpc.main",
+            "data.aws_availability_zones.available"
+          ]
+        },
+        {
+          "index_key": 1,
+          "schema_version": 0,
+          "attributes": {
+            "gateway_id": "",
+            "id": "rtbassoc-0a83925f45406a6a9",
+            "route_table_id": "rtb-032bb3f817b714dcd",
+            "subnet_id": "subnet-0d8b820cdb7caa3f8",
+            "timeouts": null
+          },
+          "sensitive_attributes": [],
+          "identity_schema_version": 0,
+          "private": "eyJlMmJmYjczMC1lY2FhLTExZTYtOGY4OC0zNDM2M2JjN2M0YzAiOnsiY3JlYXRlIjozMDAwMDAwMDAwMDAsImRlbGV0ZSI6MzAwMDAwMDAwMDAwLCJ1cGRhdGUiOjEyMDAwMDAwMDAwMH19",
+          "dependencies": [
+            "aws_eip.nat",
+            "aws_internet_gateway.main",
+            "aws_nat_gateway.main",
+            "aws_route_table.private",
+            "aws_subnet.app",
+            "aws_subnet.public",
+            "aws_vpc.main",
+            "data.aws_availability_zones.available"
+          ]
+        }
+      ]
+    },
+    {
+      "mode": "managed",
+      "type": "aws_route_table_association",
+      "name": "data",
+      "provider": "provider[\"registry.terraform.io/hashicorp/aws\"]",
+      "instances": [
+        {
+          "index_key": 0,
+          "schema_version": 0,
+          "attributes": {
+            "gateway_id": "",
+            "id": "rtbassoc-0431079ab764fbdbb",
+            "route_table_id": "rtb-08aee4789a0046e87",
+            "subnet_id": "subnet-02df6122004f455a4",
+            "timeouts": null
+          },
+          "sensitive_attributes": [],
+          "identity_schema_version": 0,
+          "private": "eyJlMmJmYjczMC1lY2FhLTExZTYtOGY4OC0zNDM2M2JjN2M0YzAiOnsiY3JlYXRlIjozMDAwMDAwMDAwMDAsImRlbGV0ZSI6MzAwMDAwMDAwMDAwLCJ1cGRhdGUiOjEyMDAwMDAwMDAwMH19",
+          "dependencies": [
+            "aws_eip.nat",
+            "aws_internet_gateway.main",
+            "aws_nat_gateway.main",
+            "aws_route_table.private",
+            "aws_subnet.data",
+            "aws_subnet.public",
+            "aws_vpc.main",
+            "data.aws_availability_zones.available"
+          ]
+        },
+        {
+          "index_key": 1,
+          "schema_version": 0,
+          "attributes": {
+            "gateway_id": "",
+            "id": "rtbassoc-0464d7d560cd64e73",
+            "route_table_id": "rtb-032bb3f817b714dcd",
+            "subnet_id": "subnet-021d631272c274034",
+            "timeouts": null
+          },
+          "sensitive_attributes": [],
+          "identity_schema_version": 0,
+          "private": "eyJlMmJmYjczMC1lY2FhLTExZTYtOGY4OC0zNDM2M2JjN2M0YzAiOnsiY3JlYXRlIjozMDAwMDAwMDAwMDAsImRlbGV0ZSI6MzAwMDAwMDAwMDAwLCJ1cGRhdGUiOjEyMDAwMDAwMDAwMH19",
+          "dependencies": [
+            "aws_eip.nat",
+            "aws_internet_gateway.main",
+            "aws_nat_gateway.main",
+            "aws_route_table.private",
+            "aws_subnet.data",
+            "aws_subnet.public",
+            "aws_vpc.main",
+            "data.aws_availability_zones.available"
+          ]
+        }
+      ]
+    },
+    {
+      "mode": "managed",
+      "type": "aws_route_table_association",
+      "name": "public",
+      "provider": "provider[\"registry.terraform.io/hashicorp/aws\"]",
+      "instances": [
+        {
+          "index_key": 0,
+          "schema_version": 0,
+          "attributes": {
+            "gateway_id": "",
+            "id": "rtbassoc-07f64f9b922c4e7bd",
+            "route_table_id": "rtb-0dd76635b036ac63b",
+            "subnet_id": "subnet-0fd378457483eab51",
+            "timeouts": null
+          },
+          "sensitive_attributes": [],
+          "identity_schema_version": 0,
+          "private": "eyJlMmJmYjczMC1lY2FhLTExZTYtOGY4OC0zNDM2M2JjN2M0YzAiOnsiY3JlYXRlIjozMDAwMDAwMDAwMDAsImRlbGV0ZSI6MzAwMDAwMDAwMDAwLCJ1cGRhdGUiOjEyMDAwMDAwMDAwMH19",
+          "dependencies": [
+            "aws_internet_gateway.main",
+            "aws_route_table.public",
+            "aws_subnet.public",
+            "aws_vpc.main",
+            "data.aws_availability_zones.available"
+          ]
+        },
+        {
+          "index_key": 1,
+          "schema_version": 0,
+          "attributes": {
+            "gateway_id": "",
+            "id": "rtbassoc-01eff510d6f6c26da",
+            "route_table_id": "rtb-0dd76635b036ac63b",
+            "subnet_id": "subnet-024efe5099ea27228",
+            "timeouts": null
+          },
+          "sensitive_attributes": [],
+          "identity_schema_version": 0,
+          "private": "eyJlMmJmYjczMC1lY2FhLTExZTYtOGY4OC0zNDM2M2JjN2M0YzAiOnsiY3JlYXRlIjozMDAwMDAwMDAwMDAsImRlbGV0ZSI6MzAwMDAwMDAwMDAwLCJ1cGRhdGUiOjEyMDAwMDAwMDAwMH19",
+          "dependencies": [
+            "aws_internet_gateway.main",
+            "aws_route_table.public",
+            "aws_subnet.public",
+            "aws_vpc.main",
+            "data.aws_availability_zones.available"
+          ]
+        }
+      ]
+    },
+    {
+      "mode": "managed",
+      "type": "aws_s3_bucket",
+      "name": "frontend",
+      "provider": "provider[\"registry.terraform.io/hashicorp/aws\"]",
+      "instances": [
+        {
+          "schema_version": 0,
+          "attributes": {
+            "acceleration_status": "",
+            "acl": null,
+            "arn": "arn:aws:s3:::exam-platform-prod-web-363242104805",
+            "bucket": "exam-platform-prod-web-363242104805",
+            "bucket_domain_name": "exam-platform-prod-web-363242104805.s3.amazonaws.com",
+            "bucket_prefix": "",
+            "bucket_regional_domain_name": "exam-platform-prod-web-363242104805.s3.us-east-1.amazonaws.com",
+            "cors_rule": [],
+            "force_destroy": true,
+            "grant": [
+              {
+                "id": "cad3b6fe8c1cd1bf5fbcf633bf28e700075306eb5f5d9ce7f80b5af5992336c6",
+                "permissions": [
+                  "FULL_CONTROL"
+                ],
+                "type": "CanonicalUser",
+                "uri": ""
+              }
+            ],
+            "hosted_zone_id": "Z3AQBSTGFYJSTF",
+            "id": "exam-platform-prod-web-363242104805",
+            "lifecycle_rule": [],
+            "logging": [],
+            "object_lock_configuration": [],
+            "object_lock_enabled": false,
+            "policy": "",
+            "region": "us-east-1",
+            "replication_configuration": [],
+            "request_payer": "BucketOwner",
+            "server_side_encryption_configuration": [
+              {
+                "rule": [
+                  {
+                    "apply_server_side_encryption_by_default": [
+                      {
+                        "kms_master_key_id": "",
+                        "sse_algorithm": "AES256"
+                      }
+                    ],
+                    "bucket_key_enabled": false
+                  }
+                ]
+              }
+            ],
+            "tags": null,
+            "tags_all": {
+              "Environment": "prod",
+              "ManagedBy": "terraform",
+              "Project": "exam-platform"
+            },
+            "timeouts": null,
+            "versioning": [
+              {
+                "enabled": false,
+                "mfa_delete": false
+              }
+            ],
+            "website": [],
+            "website_domain": null,
+            "website_endpoint": null
+          },
+          "sensitive_attributes": [],
+          "identity_schema_version": 0,
+          "private": "eyJlMmJmYjczMC1lY2FhLTExZTYtOGY4OC0zNDM2M2JjN2M0YzAiOnsiY3JlYXRlIjoxMjAwMDAwMDAwMDAwLCJkZWxldGUiOjM2MDAwMDAwMDAwMDAsInJlYWQiOjEyMDAwMDAwMDAwMDAsInVwZGF0ZSI6MTIwMDAwMDAwMDAwMH19",
+          "dependencies": [
+            "data.aws_caller_identity.current"
+          ]
+        }
+      ]
+    },
+    {
+      "mode": "managed",
+      "type": "aws_s3_bucket",
+      "name": "trail",
+      "provider": "provider[\"registry.terraform.io/hashicorp/aws\"]",
+      "instances": [
+        {
+          "index_key": 0,
+          "schema_version": 0,
+          "attributes": {
+            "acceleration_status": "",
+            "acl": null,
+            "arn": "arn:aws:s3:::exam-platform-prod-trail-363242104805",
+            "bucket": "exam-platform-prod-trail-363242104805",
+            "bucket_domain_name": "exam-platform-prod-trail-363242104805.s3.amazonaws.com",
+            "bucket_prefix": "",
+            "bucket_regional_domain_name": "exam-platform-prod-trail-363242104805.s3.us-east-1.amazonaws.com",
+            "cors_rule": [],
+            "force_destroy": true,
+            "grant": [
+              {
+                "id": "cad3b6fe8c1cd1bf5fbcf633bf28e700075306eb5f5d9ce7f80b5af5992336c6",
+                "permissions": [
+                  "FULL_CONTROL"
+                ],
+                "type": "CanonicalUser",
+                "uri": ""
+              }
+            ],
+            "hosted_zone_id": "Z3AQBSTGFYJSTF",
+            "id": "exam-platform-prod-trail-363242104805",
+            "lifecycle_rule": [],
+            "logging": [],
+            "object_lock_configuration": [],
+            "object_lock_enabled": false,
+            "policy": "",
+            "region": "us-east-1",
+            "replication_configuration": [],
+            "request_payer": "BucketOwner",
+            "server_side_encryption_configuration": [
+              {
+                "rule": [
+                  {
+                    "apply_server_side_encryption_by_default": [
+                      {
+                        "kms_master_key_id": "",
+                        "sse_algorithm": "AES256"
+                      }
+                    ],
+                    "bucket_key_enabled": false
+                  }
+                ]
+              }
+            ],
+            "tags": null,
+            "tags_all": {
+              "Environment": "prod",
+              "ManagedBy": "terraform",
+              "Project": "exam-platform"
+            },
+            "timeouts": null,
+            "versioning": [
+              {
+                "enabled": false,
+                "mfa_delete": false
+              }
+            ],
+            "website": [],
+            "website_domain": null,
+            "website_endpoint": null
+          },
+          "sensitive_attributes": [],
+          "identity_schema_version": 0,
+          "private": "eyJlMmJmYjczMC1lY2FhLTExZTYtOGY4OC0zNDM2M2JjN2M0YzAiOnsiY3JlYXRlIjoxMjAwMDAwMDAwMDAwLCJkZWxldGUiOjM2MDAwMDAwMDAwMDAsInJlYWQiOjEyMDAwMDAwMDAwMDAsInVwZGF0ZSI6MTIwMDAwMDAwMDAwMH19",
+          "dependencies": [
+            "data.aws_caller_identity.current"
+          ]
+        }
+      ]
+    },
+    {
+      "mode": "managed",
+      "type": "aws_s3_bucket",
+      "name": "uploads",
+      "provider": "provider[\"registry.terraform.io/hashicorp/aws\"]",
+      "instances": [
+        {
+          "schema_version": 0,
+          "attributes": {
+            "acceleration_status": "",
+            "acl": null,
+            "arn": "arn:aws:s3:::exam-platform-prod-uploads-363242104805",
+            "bucket": "exam-platform-prod-uploads-363242104805",
+            "bucket_domain_name": "exam-platform-prod-uploads-363242104805.s3.amazonaws.com",
+            "bucket_prefix": "",
+            "bucket_regional_domain_name": "exam-platform-prod-uploads-363242104805.s3.us-east-1.amazonaws.com",
+            "cors_rule": [],
+            "force_destroy": true,
+            "grant": [
+              {
+                "id": "cad3b6fe8c1cd1bf5fbcf633bf28e700075306eb5f5d9ce7f80b5af5992336c6",
+                "permissions": [
+                  "FULL_CONTROL"
+                ],
+                "type": "CanonicalUser",
+                "uri": ""
+              }
+            ],
+            "hosted_zone_id": "Z3AQBSTGFYJSTF",
+            "id": "exam-platform-prod-uploads-363242104805",
+            "lifecycle_rule": [],
+            "logging": [],
+            "object_lock_configuration": [],
+            "object_lock_enabled": false,
+            "policy": "",
+            "region": "us-east-1",
+            "replication_configuration": [],
+            "request_payer": "BucketOwner",
+            "server_side_encryption_configuration": [
+              {
+                "rule": [
+                  {
+                    "apply_server_side_encryption_by_default": [
+                      {
+                        "kms_master_key_id": "",
+                        "sse_algorithm": "AES256"
+                      }
+                    ],
+                    "bucket_key_enabled": false
+                  }
+                ]
+              }
+            ],
+            "tags": null,
+            "tags_all": {
+              "Environment": "prod",
+              "ManagedBy": "terraform",
+              "Project": "exam-platform"
+            },
+            "timeouts": null,
+            "versioning": [
+              {
+                "enabled": false,
+                "mfa_delete": false
+              }
+            ],
+            "website": [],
+            "website_domain": null,
+            "website_endpoint": null
+          },
+          "sensitive_attributes": [],
+          "identity_schema_version": 0,
+          "private": "eyJlMmJmYjczMC1lY2FhLTExZTYtOGY4OC0zNDM2M2JjN2M0YzAiOnsiY3JlYXRlIjoxMjAwMDAwMDAwMDAwLCJkZWxldGUiOjM2MDAwMDAwMDAwMDAsInJlYWQiOjEyMDAwMDAwMDAwMDAsInVwZGF0ZSI6MTIwMDAwMDAwMDAwMH19",
+          "dependencies": [
+            "data.aws_caller_identity.current"
+          ]
+        }
+      ]
+    },
+    {
+      "mode": "managed",
+      "type": "aws_s3_bucket_lifecycle_configuration",
+      "name": "uploads",
+      "provider": "provider[\"registry.terraform.io/hashicorp/aws\"]",
+      "instances": [
+        {
+          "schema_version": 1,
+          "attributes": {
+            "bucket": "exam-platform-prod-uploads-363242104805",
+            "expected_bucket_owner": "",
+            "id": "exam-platform-prod-uploads-363242104805",
+            "rule": [
+              {
+                "abort_incomplete_multipart_upload": [],
+                "expiration": [
+                  {
+                    "date": null,
+                    "days": 1825,
+                    "expired_object_delete_marker": false
+                  }
+                ],
+                "filter": [
+                  {
+                    "and": [],
+                    "object_size_greater_than": null,
+                    "object_size_less_than": null,
+                    "prefix": "assignments/",
+                    "tag": []
+                  }
+                ],
+                "id": "records-retention-5-years",
+                "noncurrent_version_expiration": [
+                  {
+                    "newer_noncurrent_versions": null,
+                    "noncurrent_days": 30
+                  }
+                ],
+                "noncurrent_version_transition": [],
+                "prefix": "",
+                "status": "Enabled",
+                "transition": [
+                  {
+                    "date": null,
+                    "days": 180,
+                    "storage_class": "GLACIER_IR"
+                  },
+                  {
+                    "date": null,
+                    "days": 30,
+                    "storage_class": "STANDARD_IA"
+                  },
+                  {
+                    "date": null,
+                    "days": 365,
+                    "storage_class": "DEEP_ARCHIVE"
+                  }
+                ]
+              },
+              {
+                "abort_incomplete_multipart_upload": [
+                  {
+                    "days_after_initiation": 1
+                  }
+                ],
+                "expiration": [],
+                "filter": [
+                  {
+                    "and": [],
+                    "object_size_greater_than": null,
+                    "object_size_less_than": null,
+                    "prefix": "",
+                    "tag": []
+                  }
+                ],
+                "id": "abort-incomplete-multipart",
+                "noncurrent_version_expiration": [],
+                "noncurrent_version_transition": [],
+                "prefix": "",
+                "status": "Enabled",
+                "transition": []
+              }
+            ],
+            "timeouts": null,
+            "transition_default_minimum_object_size": "all_storage_classes_128K"
+          },
+          "sensitive_attributes": [],
+          "identity_schema_version": 0,
+          "dependencies": [
+            "aws_s3_bucket.uploads",
+            "data.aws_caller_identity.current"
+          ]
+        }
+      ]
+    },
+    {
+      "mode": "managed",
+      "type": "aws_s3_bucket_notification",
+      "name": "uploads",
+      "provider": "provider[\"registry.terraform.io/hashicorp/aws\"]",
+      "instances": [
+        {
+          "schema_version": 0,
+          "attributes": {
+            "bucket": "exam-platform-prod-uploads-363242104805",
+            "eventbridge": false,
+            "id": "exam-platform-prod-uploads-363242104805",
+            "lambda_function": [],
+            "queue": [],
+            "topic": []
+          },
+          "sensitive_attributes": [],
+          "identity_schema_version": 0,
+          "private": "bnVsbA==",
+          "dependencies": [
+            "aws_s3_bucket.uploads",
+            "aws_sqs_queue.dlq",
+            "aws_sqs_queue.main",
+            "aws_sqs_queue_policy.uploads",
+            "data.aws_caller_identity.current"
+          ]
+        }
+      ]
+    },
+    {
+      "mode": "managed",
+      "type": "aws_s3_bucket_ownership_controls",
+      "name": "uploads",
+      "provider": "provider[\"registry.terraform.io/hashicorp/aws\"]",
+      "instances": [
+        {
+          "schema_version": 0,
+          "attributes": {
+            "bucket": "exam-platform-prod-uploads-363242104805",
+            "id": "exam-platform-prod-uploads-363242104805",
+            "rule": [
+              {
+                "object_ownership": "BucketOwnerEnforced"
+              }
+            ]
+          },
+          "sensitive_attributes": [],
+          "identity_schema_version": 0,
+          "private": "bnVsbA==",
+          "dependencies": [
+            "aws_s3_bucket.uploads",
+            "data.aws_caller_identity.current"
+          ]
+        }
+      ]
+    },
+    {
+      "mode": "managed",
+      "type": "aws_s3_bucket_policy",
+      "name": "trail",
+      "provider": "provider[\"registry.terraform.io/hashicorp/aws\"]",
+      "instances": [
+        {
+          "index_key": 0,
+          "schema_version": 0,
+          "attributes": {
+            "bucket": "exam-platform-prod-trail-363242104805",
+            "id": "exam-platform-prod-trail-363242104805",
+            "policy": "{\"Statement\":[{\"Action\":\"s3:GetBucketAcl\",\"Effect\":\"Allow\",\"Principal\":{\"Service\":\"cloudtrail.amazonaws.com\"},\"Resource\":\"arn:aws:s3:::exam-platform-prod-trail-363242104805\",\"Sid\":\"AclCheck\"},{\"Action\":\"s3:PutObject\",\"Condition\":{\"StringEquals\":{\"s3:x-amz-acl\":\"bucket-owner-full-control\"}},\"Effect\":\"Allow\",\"Principal\":{\"Service\":\"cloudtrail.amazonaws.com\"},\"Resource\":\"arn:aws:s3:::exam-platform-prod-trail-363242104805/AWSLogs/363242104805/*\",\"Sid\":\"Write\"}],\"Version\":\"2012-10-17\"}"
+          },
+          "sensitive_attributes": [],
+          "identity_schema_version": 0,
+          "private": "bnVsbA==",
+          "dependencies": [
+            "aws_s3_bucket.trail",
+            "data.aws_caller_identity.current"
+          ]
+        }
+      ]
+    },
+    {
+      "mode": "managed",
+      "type": "aws_s3_bucket_policy",
+      "name": "uploads",
+      "provider": "provider[\"registry.terraform.io/hashicorp/aws\"]",
+      "instances": [
+        {
+          "schema_version": 0,
+          "attributes": {
+            "bucket": "exam-platform-prod-uploads-363242104805",
+            "id": "exam-platform-prod-uploads-363242104805",
+            "policy": "{\"Statement\":[{\"Action\":\"s3:*\",\"Condition\":{\"Bool\":{\"aws:SecureTransport\":\"false\"}},\"Effect\":\"Deny\",\"Principal\":\"*\",\"Resource\":[\"arn:aws:s3:::exam-platform-prod-uploads-363242104805\",\"arn:aws:s3:::exam-platform-prod-uploads-363242104805/*\"],\"Sid\":\"DenyInsecureTransport\"}],\"Version\":\"2012-10-17\"}"
+          },
+          "sensitive_attributes": [],
+          "identity_schema_version": 0,
+          "private": "bnVsbA==",
+          "dependencies": [
+            "aws_s3_bucket.uploads",
+            "aws_s3_bucket_public_access_block.uploads",
+            "data.aws_caller_identity.current"
+          ]
+        }
+      ]
+    },
+    {
+      "mode": "managed",
+      "type": "aws_s3_bucket_public_access_block",
+      "name": "frontend",
+      "provider": "provider[\"registry.terraform.io/hashicorp/aws\"]",
+      "instances": [
+        {
+          "schema_version": 0,
+          "attributes": {
+            "block_public_acls": true,
+            "block_public_policy": true,
+            "bucket": "exam-platform-prod-web-363242104805",
+            "id": "exam-platform-prod-web-363242104805",
+            "ignore_public_acls": true,
+            "restrict_public_buckets": true
+          },
+          "sensitive_attributes": [],
+          "identity_schema_version": 0,
+          "private": "bnVsbA==",
+          "dependencies": [
+            "aws_s3_bucket.frontend",
+            "data.aws_caller_identity.current"
+          ]
+        }
+      ]
+    },
+    {
+      "mode": "managed",
+      "type": "aws_s3_bucket_public_access_block",
+      "name": "trail",
+      "provider": "provider[\"registry.terraform.io/hashicorp/aws\"]",
+      "instances": [
+        {
+          "index_key": 0,
+          "schema_version": 0,
+          "attributes": {
+            "block_public_acls": true,
+            "block_public_policy": true,
+            "bucket": "exam-platform-prod-trail-363242104805",
+            "id": "exam-platform-prod-trail-363242104805",
+            "ignore_public_acls": true,
+            "restrict_public_buckets": true
+          },
+          "sensitive_attributes": [],
+          "identity_schema_version": 0,
+          "private": "bnVsbA==",
+          "dependencies": [
+            "aws_s3_bucket.trail",
+            "data.aws_caller_identity.current"
+          ]
+        }
+      ]
+    },
+    {
+      "mode": "managed",
+      "type": "aws_s3_bucket_public_access_block",
+      "name": "uploads",
+      "provider": "provider[\"registry.terraform.io/hashicorp/aws\"]",
+      "instances": [
+        {
+          "schema_version": 0,
+          "attributes": {
+            "block_public_acls": true,
+            "block_public_policy": true,
+            "bucket": "exam-platform-prod-uploads-363242104805",
+            "id": "exam-platform-prod-uploads-363242104805",
+            "ignore_public_acls": true,
+            "restrict_public_buckets": true
+          },
+          "sensitive_attributes": [],
+          "identity_schema_version": 0,
+          "private": "bnVsbA==",
+          "dependencies": [
+            "aws_s3_bucket.uploads",
+            "data.aws_caller_identity.current"
+          ]
+        }
+      ]
+    },
+    {
+      "mode": "managed",
+      "type": "aws_s3_bucket_server_side_encryption_configuration",
+      "name": "frontend",
+      "provider": "provider[\"registry.terraform.io/hashicorp/aws\"]",
+      "instances": [
+        {
+          "schema_version": 0,
+          "attributes": {
+            "bucket": "exam-platform-prod-web-363242104805",
+            "expected_bucket_owner": "",
+            "id": "exam-platform-prod-web-363242104805",
+            "rule": [
+              {
+                "apply_server_side_encryption_by_default": [
+                  {
+                    "kms_master_key_id": "",
+                    "sse_algorithm": "AES256"
+                  }
+                ],
+                "bucket_key_enabled": null
+              }
+            ]
+          },
+          "sensitive_attributes": [],
+          "identity_schema_version": 0,
+          "private": "bnVsbA==",
+          "dependencies": [
+            "aws_s3_bucket.frontend",
+            "data.aws_caller_identity.current"
+          ]
+        }
+      ]
+    },
+    {
+      "mode": "managed",
+      "type": "aws_s3_bucket_server_side_encryption_configuration",
+      "name": "uploads",
+      "provider": "provider[\"registry.terraform.io/hashicorp/aws\"]",
+      "instances": [
+        {
+          "schema_version": 0,
+          "attributes": {
+            "bucket": "exam-platform-prod-uploads-363242104805",
+            "expected_bucket_owner": "",
+            "id": "exam-platform-prod-uploads-363242104805",
+            "rule": [
+              {
+                "apply_server_side_encryption_by_default": [
+                  {
+                    "kms_master_key_id": "arn:aws:kms:us-east-1:363242104805:key/a99cc916-c4f2-499c-a61d-ff859a2c5b8d",
+                    "sse_algorithm": "aws:kms"
+                  }
+                ],
+                "bucket_key_enabled": true
+              }
+            ]
+          },
+          "sensitive_attributes": [],
+          "identity_schema_version": 0,
+          "private": "bnVsbA==",
+          "dependencies": [
+            "aws_kms_key.main",
+            "aws_s3_bucket.uploads",
+            "data.aws_caller_identity.current"
+          ]
+        }
+      ]
+    },
+    {
+      "mode": "managed",
+      "type": "aws_s3_bucket_versioning",
+      "name": "uploads",
+      "provider": "provider[\"registry.terraform.io/hashicorp/aws\"]",
+      "instances": [
+        {
+          "schema_version": 0,
+          "attributes": {
+            "bucket": "exam-platform-prod-uploads-363242104805",
+            "expected_bucket_owner": "",
+            "id": "exam-platform-prod-uploads-363242104805",
+            "mfa": null,
+            "versioning_configuration": [
+              {
+                "mfa_delete": "",
+                "status": "Enabled"
+              }
+            ]
+          },
+          "sensitive_attributes": [],
+          "identity_schema_version": 0,
+          "private": "bnVsbA==",
+          "dependencies": [
+            "aws_s3_bucket.uploads",
+            "data.aws_caller_identity.current"
+          ]
+        }
+      ]
+    },
+    {
+      "mode": "managed",
+      "type": "aws_s3_object",
+      "name": "frontend",
+      "provider": "provider[\"registry.terraform.io/hashicorp/aws\"]",
+      "instances": [
+        {
+          "index_key": "app.js",
+          "schema_version": 0,
+          "attributes": {
+            "acl": null,
+            "arn": "arn:aws:s3:::exam-platform-prod-web-363242104805/app.js",
+            "bucket": "exam-platform-prod-web-363242104805",
+            "bucket_key_enabled": false,
+            "cache_control": "",
+            "checksum_algorithm": null,
+            "checksum_crc32": "",
+            "checksum_crc32c": "",
+            "checksum_crc64nvme": "",
+            "checksum_sha1": "",
+            "checksum_sha256": "",
+            "content": null,
+            "content_base64": null,
+            "content_disposition": "",
+            "content_encoding": "",
+            "content_language": "",
+            "content_type": "application/javascript; charset=utf-8",
+            "etag": "5e01a4cfce2665872a07226fc3a66aaf",
+            "force_destroy": false,
+            "id": "app.js",
+            "key": "app.js",
+            "kms_key_id": null,
+            "metadata": null,
+            "object_lock_legal_hold_status": "",
+            "object_lock_mode": "",
+            "object_lock_retain_until_date": "",
+            "override_provider": [],
+            "server_side_encryption": "AES256",
+            "source": "./../frontend/app.js",
+            "source_hash": null,
+            "storage_class": "STANDARD",
+            "tags": null,
+            "tags_all": {
+              "Environment": "prod",
+              "ManagedBy": "terraform",
+              "Project": "exam-platform"
+            },
+            "version_id": "",
+            "website_redirect": ""
+          },
+          "sensitive_attributes": [],
+          "identity_schema_version": 0,
+          "private": "bnVsbA==",
+          "dependencies": [
+            "aws_s3_bucket.frontend",
+            "data.aws_caller_identity.current"
+          ]
+        },
+        {
+          "index_key": "index.html",
+          "schema_version": 0,
+          "attributes": {
+            "acl": null,
+            "arn": "arn:aws:s3:::exam-platform-prod-web-363242104805/index.html",
+            "bucket": "exam-platform-prod-web-363242104805",
+            "bucket_key_enabled": false,
+            "cache_control": "",
+            "checksum_algorithm": null,
+            "checksum_crc32": "",
+            "checksum_crc32c": "",
+            "checksum_crc64nvme": "",
+            "checksum_sha1": "",
+            "checksum_sha256": "",
+            "content": null,
+            "content_base64": null,
+            "content_disposition": "",
+            "content_encoding": "",
+            "content_language": "",
+            "content_type": "text/html; charset=utf-8",
+            "etag": "b9b1550081f76d86b073d86c41e9e128",
+            "force_destroy": false,
+            "id": "index.html",
+            "key": "index.html",
+            "kms_key_id": null,
+            "metadata": null,
+            "object_lock_legal_hold_status": "",
+            "object_lock_mode": "",
+            "object_lock_retain_until_date": "",
+            "override_provider": [],
+            "server_side_encryption": "AES256",
+            "source": "./../frontend/index.html",
+            "source_hash": null,
+            "storage_class": "STANDARD",
+            "tags": null,
+            "tags_all": {
+              "Environment": "prod",
+              "ManagedBy": "terraform",
+              "Project": "exam-platform"
+            },
+            "version_id": "",
+            "website_redirect": ""
+          },
+          "sensitive_attributes": [],
+          "identity_schema_version": 0,
+          "private": "bnVsbA==",
+          "dependencies": [
+            "aws_s3_bucket.frontend",
+            "data.aws_caller_identity.current"
+          ]
+        },
+        {
+          "index_key": "styles.css",
+          "schema_version": 0,
+          "attributes": {
+            "acl": null,
+            "arn": "arn:aws:s3:::exam-platform-prod-web-363242104805/styles.css",
+            "bucket": "exam-platform-prod-web-363242104805",
+            "bucket_key_enabled": false,
+            "cache_control": "",
+            "checksum_algorithm": null,
+            "checksum_crc32": "",
+            "checksum_crc32c": "",
+            "checksum_crc64nvme": "",
+            "checksum_sha1": "",
+            "checksum_sha256": "",
+            "content": null,
+            "content_base64": null,
+            "content_disposition": "",
+            "content_encoding": "",
+            "content_language": "",
+            "content_type": "text/css; charset=utf-8",
+            "etag": "2306f654725da83b3bf8348cd69eaf58",
+            "force_destroy": false,
+            "id": "styles.css",
+            "key": "styles.css",
+            "kms_key_id": null,
+            "metadata": null,
+            "object_lock_legal_hold_status": "",
+            "object_lock_mode": "",
+            "object_lock_retain_until_date": "",
+            "override_provider": [],
+            "server_side_encryption": "AES256",
+            "source": "./../frontend/styles.css",
+            "source_hash": null,
+            "storage_class": "STANDARD",
+            "tags": null,
+            "tags_all": {
+              "Environment": "prod",
+              "ManagedBy": "terraform",
+              "Project": "exam-platform"
+            },
+            "version_id": "",
+            "website_redirect": ""
+          },
+          "sensitive_attributes": [],
+          "identity_schema_version": 0,
+          "private": "bnVsbA==",
+          "dependencies": [
+            "aws_s3_bucket.frontend",
+            "data.aws_caller_identity.current"
+          ]
+        }
+      ]
+    },
+    {
+      "mode": "managed",
+      "type": "aws_security_group",
+      "name": "db",
+      "provider": "provider[\"registry.terraform.io/hashicorp/aws\"]",
+      "instances": [
+        {
+          "schema_version": 1,
+          "attributes": {
+            "arn": "arn:aws:ec2:us-east-1:363242104805:security-group/sg-0ce2fe7b96a1a34b5",
+            "description": "RDS PostgreSQL - only reachable from RDS Proxy",
+            "egress": [],
+            "id": "sg-0ce2fe7b96a1a34b5",
+            "ingress": [
+              {
+                "cidr_blocks": [],
+                "description": "PostgreSQL from Lambda (no RDS Proxy)",
+                "from_port": 5432,
+                "ipv6_cidr_blocks": [],
+                "prefix_list_ids": [],
+                "protocol": "tcp",
+                "security_groups": [
+                  "sg-0bfb84900078b8187"
+                ],
+                "self": false,
+                "to_port": 5432
+              },
+              {
+                "cidr_blocks": [],
+                "description": "PostgreSQL from RDS Proxy",
+                "from_port": 5432,
+                "ipv6_cidr_blocks": [],
+                "prefix_list_ids": [],
+                "protocol": "tcp",
+                "security_groups": [
+                  "sg-09129fc3dd384ee8c"
+                ],
+                "self": false,
+                "to_port": 5432
+              }
+            ],
+            "name": "exam-platform-prod-rds-sg",
+            "name_prefix": "",
+            "owner_id": "363242104805",
+            "revoke_rules_on_delete": false,
+            "tags": null,
+            "tags_all": {
+              "Environment": "prod",
+              "ManagedBy": "terraform",
+              "Project": "exam-platform"
+            },
+            "timeouts": null,
+            "vpc_id": "vpc-0620110922ee993b6"
+          },
+          "sensitive_attributes": [],
+          "identity_schema_version": 0,
+          "private": "eyJlMmJmYjczMC1lY2FhLTExZTYtOGY4OC0zNDM2M2JjN2M0YzAiOnsiY3JlYXRlIjo2MDAwMDAwMDAwMDAsImRlbGV0ZSI6OTAwMDAwMDAwMDAwfSwic2NoZW1hX3ZlcnNpb24iOiIxIn0=",
+          "dependencies": [
+            "aws_security_group.lambda",
+            "aws_security_group.proxy",
+            "aws_vpc.main"
+          ]
+        }
+      ]
+    },
+    {
+      "mode": "managed",
+      "type": "aws_security_group",
+      "name": "endpoints",
+      "provider": "provider[\"registry.terraform.io/hashicorp/aws\"]",
+      "instances": [
+        {
+          "schema_version": 1,
+          "attributes": {
+            "arn": "arn:aws:ec2:us-east-1:363242104805:security-group/sg-0acab2d25fbf23abd",
+            "description": "Interface VPC endpoints",
+            "egress": [],
+            "id": "sg-0acab2d25fbf23abd",
+            "ingress": [
+              {
+                "cidr_blocks": [],
+                "description": "HTTPS from Lambda",
+                "from_port": 443,
+                "ipv6_cidr_blocks": [],
+                "prefix_list_ids": [],
+                "protocol": "tcp",
+                "security_groups": [
+                  "sg-0bfb84900078b8187"
+                ],
+                "self": false,
+                "to_port": 443
+              }
+            ],
+            "name": "exam-platform-prod-vpce-sg",
+            "name_prefix": "",
+            "owner_id": "363242104805",
+            "revoke_rules_on_delete": false,
+            "tags": null,
+            "tags_all": {
+              "Environment": "prod",
+              "ManagedBy": "terraform",
+              "Project": "exam-platform"
+            },
+            "timeouts": null,
+            "vpc_id": "vpc-0620110922ee993b6"
+          },
+          "sensitive_attributes": [],
+          "identity_schema_version": 0,
+          "private": "eyJlMmJmYjczMC1lY2FhLTExZTYtOGY4OC0zNDM2M2JjN2M0YzAiOnsiY3JlYXRlIjo2MDAwMDAwMDAwMDAsImRlbGV0ZSI6OTAwMDAwMDAwMDAwfSwic2NoZW1hX3ZlcnNpb24iOiIxIn0=",
+          "dependencies": [
+            "aws_security_group.lambda",
+            "aws_vpc.main"
+          ]
+        }
+      ]
+    },
+    {
+      "mode": "managed",
+      "type": "aws_security_group",
+      "name": "lambda",
+      "provider": "provider[\"registry.terraform.io/hashicorp/aws\"]",
+      "instances": [
+        {
+          "schema_version": 1,
+          "attributes": {
+            "arn": "arn:aws:ec2:us-east-1:363242104805:security-group/sg-0bfb84900078b8187",
+            "description": "VPC Lambda functions",
+            "egress": [
+              {
+                "cidr_blocks": [
+                  "0.0.0.0/0"
+                ],
+                "description": "HTTPS to VPC endpoints / AWS APIs",
+                "from_port": 443,
+                "ipv6_cidr_blocks": [],
+                "prefix_list_ids": [],
+                "protocol": "tcp",
+                "security_groups": [],
+                "self": false,
+                "to_port": 443
+              },
+              {
+                "cidr_blocks": [
+                  "10.20.0.0/16"
+                ],
+                "description": "PostgreSQL to RDS Proxy",
+                "from_port": 5432,
+                "ipv6_cidr_blocks": [],
+                "prefix_list_ids": [],
+                "protocol": "tcp",
+                "security_groups": [],
+                "self": false,
+                "to_port": 5432
+              }
+            ],
+            "id": "sg-0bfb84900078b8187",
+            "ingress": [],
+            "name": "exam-platform-prod-lambda-sg",
+            "name_prefix": "",
+            "owner_id": "363242104805",
+            "revoke_rules_on_delete": false,
+            "tags": null,
+            "tags_all": {
+              "Environment": "prod",
+              "ManagedBy": "terraform",
+              "Project": "exam-platform"
+            },
+            "timeouts": null,
+            "vpc_id": "vpc-0620110922ee993b6"
+          },
+          "sensitive_attributes": [],
+          "identity_schema_version": 0,
+          "private": "eyJlMmJmYjczMC1lY2FhLTExZTYtOGY4OC0zNDM2M2JjN2M0YzAiOnsiY3JlYXRlIjo2MDAwMDAwMDAwMDAsImRlbGV0ZSI6OTAwMDAwMDAwMDAwfSwic2NoZW1hX3ZlcnNpb24iOiIxIn0=",
+          "dependencies": [
+            "aws_vpc.main"
+          ]
+        }
+      ]
+    },
+    {
+      "mode": "managed",
+      "type": "aws_security_group",
+      "name": "proxy",
+      "provider": "provider[\"registry.terraform.io/hashicorp/aws\"]",
+      "instances": [
+        {
+          "schema_version": 1,
+          "attributes": {
+            "arn": "arn:aws:ec2:us-east-1:363242104805:security-group/sg-09129fc3dd384ee8c",
+            "description": "RDS Proxy",
+            "egress": [
+              {
+                "cidr_blocks": [
+                  "10.20.0.0/16"
+                ],
+                "description": "PostgreSQL to RDS",
+                "from_port": 5432,
+                "ipv6_cidr_blocks": [],
+                "prefix_list_ids": [],
+                "protocol": "tcp",
+                "security_groups": [],
+                "self": false,
+                "to_port": 5432
+              }
+            ],
+            "id": "sg-09129fc3dd384ee8c",
+            "ingress": [
+              {
+                "cidr_blocks": [],
+                "description": "PostgreSQL from Lambda",
+                "from_port": 5432,
+                "ipv6_cidr_blocks": [],
+                "prefix_list_ids": [],
+                "protocol": "tcp",
+                "security_groups": [
+                  "sg-0bfb84900078b8187"
+                ],
+                "self": false,
+                "to_port": 5432
+              }
+            ],
+            "name": "exam-platform-prod-rds-proxy-sg",
+            "name_prefix": "",
+            "owner_id": "363242104805",
+            "revoke_rules_on_delete": false,
+            "tags": null,
+            "tags_all": {
+              "Environment": "prod",
+              "ManagedBy": "terraform",
+              "Project": "exam-platform"
+            },
+            "timeouts": null,
+            "vpc_id": "vpc-0620110922ee993b6"
+          },
+          "sensitive_attributes": [],
+          "identity_schema_version": 0,
+          "private": "eyJlMmJmYjczMC1lY2FhLTExZTYtOGY4OC0zNDM2M2JjN2M0YzAiOnsiY3JlYXRlIjo2MDAwMDAwMDAwMDAsImRlbGV0ZSI6OTAwMDAwMDAwMDAwfSwic2NoZW1hX3ZlcnNpb24iOiIxIn0=",
+          "dependencies": [
+            "aws_security_group.lambda",
+            "aws_vpc.main"
+          ]
+        }
+      ]
+    },
+    {
+      "mode": "managed",
+      "type": "aws_sesv2_email_identity",
+      "name": "sender",
+      "provider": "provider[\"registry.terraform.io/hashicorp/aws\"]",
+      "instances": [
+        {
+          "schema_version": 0,
+          "attributes": {
+            "arn": "arn:aws:ses:us-east-1:363242104805:identity/02230297.cst@rub.edu.bt",
+            "configuration_set_name": "",
+            "dkim_signing_attributes": [
+              {
+                "current_signing_key_length": "",
+                "domain_signing_private_key": "",
+                "domain_signing_selector": "",
+                "last_key_generation_timestamp": "",
+                "next_signing_key_length": "RSA_1024_BIT",
+                "signing_attributes_origin": "AWS_SES",
+                "status": "NOT_STARTED",
+                "tokens": []
+              }
+            ],
+            "email_identity": "02230297.cst@rub.edu.bt",
+            "id": "02230297.cst@rub.edu.bt",
+            "identity_type": "EMAIL_ADDRESS",
+            "tags": null,
+            "tags_all": {
+              "Environment": "prod",
+              "ManagedBy": "terraform",
+              "Project": "exam-platform"
+            },
+            "verified_for_sending_status": false
+          },
+          "sensitive_attributes": [
+            [
+              {
+                "type": "get_attr",
+                "value": "dkim_signing_attributes"
+              },
+              {
+                "type": "index",
+                "value": {
+                  "value": 0,
+                  "type": "number"
+                }
+              },
+              {
+                "type": "get_attr",
+                "value": "domain_signing_private_key"
+              }
+            ]
+          ],
+          "identity_schema_version": 0,
+          "private": "bnVsbA=="
+        }
+      ]
+    },
+    {
+      "mode": "managed",
+      "type": "aws_sesv2_email_identity",
+      "name": "test_recipients",
+      "provider": "provider[\"registry.terraform.io/hashicorp/aws\"]",
+      "instances": [
+        {
+          "index_key": "02230297.cst+admin@rub.edu.bt",
+          "schema_version": 0,
+          "attributes": {
+            "arn": "arn:aws:ses:us-east-1:363242104805:identity/02230297.cst+admin@rub.edu.bt",
+            "configuration_set_name": "",
+            "dkim_signing_attributes": [
+              {
+                "current_signing_key_length": "",
+                "domain_signing_private_key": "",
+                "domain_signing_selector": "",
+                "last_key_generation_timestamp": "",
+                "next_signing_key_length": "RSA_1024_BIT",
+                "signing_attributes_origin": "AWS_SES",
+                "status": "NOT_STARTED",
+                "tokens": []
+              }
+            ],
+            "email_identity": "02230297.cst+admin@rub.edu.bt",
+            "id": "02230297.cst+admin@rub.edu.bt",
+            "identity_type": "EMAIL_ADDRESS",
+            "tags": null,
+            "tags_all": {
+              "Environment": "prod",
+              "ManagedBy": "terraform",
+              "Project": "exam-platform"
+            },
+            "verified_for_sending_status": false
+          },
+          "sensitive_attributes": [
+            [
+              {
+                "type": "get_attr",
+                "value": "dkim_signing_attributes"
+              },
+              {
+                "type": "index",
+                "value": {
+                  "value": 0,
+                  "type": "number"
+                }
+              },
+              {
+                "type": "get_attr",
+                "value": "domain_signing_private_key"
+              }
+            ]
+          ],
+          "identity_schema_version": 0,
+          "private": "bnVsbA=="
+        },
+        {
+          "index_key": "02230297.cst+student@rub.edu.bt",
+          "schema_version": 0,
+          "attributes": {
+            "arn": "arn:aws:ses:us-east-1:363242104805:identity/02230297.cst+student@rub.edu.bt",
+            "configuration_set_name": "",
+            "dkim_signing_attributes": [
+              {
+                "current_signing_key_length": "",
+                "domain_signing_private_key": "",
+                "domain_signing_selector": "",
+                "last_key_generation_timestamp": "",
+                "next_signing_key_length": "RSA_1024_BIT",
+                "signing_attributes_origin": "AWS_SES",
+                "status": "NOT_STARTED",
+                "tokens": []
+              }
+            ],
+            "email_identity": "02230297.cst+student@rub.edu.bt",
+            "id": "02230297.cst+student@rub.edu.bt",
+            "identity_type": "EMAIL_ADDRESS",
+            "tags": null,
+            "tags_all": {
+              "Environment": "prod",
+              "ManagedBy": "terraform",
+              "Project": "exam-platform"
+            },
+            "verified_for_sending_status": false
+          },
+          "sensitive_attributes": [
+            [
+              {
+                "type": "get_attr",
+                "value": "dkim_signing_attributes"
+              },
+              {
+                "type": "index",
+                "value": {
+                  "value": 0,
+                  "type": "number"
+                }
+              },
+              {
+                "type": "get_attr",
+                "value": "domain_signing_private_key"
+              }
+            ]
+          ],
+          "identity_schema_version": 0,
+          "private": "bnVsbA=="
+        },
+        {
+          "index_key": "02230297.cst+tutor@rub.edu.bt",
+          "schema_version": 0,
+          "attributes": {
+            "arn": "arn:aws:ses:us-east-1:363242104805:identity/02230297.cst+tutor@rub.edu.bt",
+            "configuration_set_name": "",
+            "dkim_signing_attributes": [
+              {
+                "current_signing_key_length": "",
+                "domain_signing_private_key": "",
+                "domain_signing_selector": "",
+                "last_key_generation_timestamp": "",
+                "next_signing_key_length": "RSA_1024_BIT",
+                "signing_attributes_origin": "AWS_SES",
+                "status": "NOT_STARTED",
+                "tokens": []
+              }
+            ],
+            "email_identity": "02230297.cst+tutor@rub.edu.bt",
+            "id": "02230297.cst+tutor@rub.edu.bt",
+            "identity_type": "EMAIL_ADDRESS",
+            "tags": null,
+            "tags_all": {
+              "Environment": "prod",
+              "ManagedBy": "terraform",
+              "Project": "exam-platform"
+            },
+            "verified_for_sending_status": false
+          },
+          "sensitive_attributes": [
+            [
+              {
+                "type": "get_attr",
+                "value": "dkim_signing_attributes"
+              },
+              {
+                "type": "index",
+                "value": {
+                  "value": 0,
+                  "type": "number"
+                }
+              },
+              {
+                "type": "get_attr",
+                "value": "domain_signing_private_key"
+              }
+            ]
+          ],
+          "identity_schema_version": 0,
+          "private": "bnVsbA=="
+        }
+      ]
+    },
+    {
+      "mode": "managed",
+      "type": "aws_sns_topic",
+      "name": "alarms",
+      "provider": "provider[\"registry.terraform.io/hashicorp/aws\"]",
+      "instances": [
+        {
+          "schema_version": 0,
+          "attributes": {
+            "application_failure_feedback_role_arn": "",
+            "application_success_feedback_role_arn": "",
+            "application_success_feedback_sample_rate": 0,
+            "archive_policy": "",
+            "arn": "arn:aws:sns:us-east-1:363242104805:exam-platform-prod-alarms",
+            "beginning_archive_time": "",
+            "content_based_deduplication": false,
+            "delivery_policy": "",
+            "display_name": "",
+            "fifo_throughput_scope": "",
+            "fifo_topic": false,
+            "firehose_failure_feedback_role_arn": "",
+            "firehose_success_feedback_role_arn": "",
+            "firehose_success_feedback_sample_rate": 0,
+            "http_failure_feedback_role_arn": "",
+            "http_success_feedback_role_arn": "",
+            "http_success_feedback_sample_rate": 0,
+            "id": "arn:aws:sns:us-east-1:363242104805:exam-platform-prod-alarms",
+            "kms_master_key_id": "",
+            "lambda_failure_feedback_role_arn": "",
+            "lambda_success_feedback_role_arn": "",
+            "lambda_success_feedback_sample_rate": 0,
+            "name": "exam-platform-prod-alarms",
+            "name_prefix": "",
+            "owner": "363242104805",
+            "policy": "{\"Id\":\"__default_policy_ID\",\"Statement\":[{\"Action\":[\"SNS:GetTopicAttributes\",\"SNS:SetTopicAttributes\",\"SNS:AddPermission\",\"SNS:RemovePermission\",\"SNS:DeleteTopic\",\"SNS:Subscribe\",\"SNS:ListSubscriptionsByTopic\",\"SNS:Publish\"],\"Condition\":{\"StringEquals\":{\"AWS:SourceOwner\":\"363242104805\"}},\"Effect\":\"Allow\",\"Principal\":{\"AWS\":\"*\"},\"Resource\":\"arn:aws:sns:us-east-1:363242104805:exam-platform-prod-alarms\",\"Sid\":\"__default_statement_ID\"}],\"Version\":\"2008-10-17\"}",
+            "signature_version": 0,
+            "sqs_failure_feedback_role_arn": "",
+            "sqs_success_feedback_role_arn": "",
+            "sqs_success_feedback_sample_rate": 0,
+            "tags": null,
+            "tags_all": {
+              "Environment": "prod",
+              "ManagedBy": "terraform",
+              "Project": "exam-platform"
+            },
+            "tracing_config": ""
+          },
+          "sensitive_attributes": [],
+          "identity_schema_version": 0,
+          "private": "bnVsbA=="
+        }
+      ]
+    },
+    {
+      "mode": "managed",
+      "type": "aws_sns_topic_subscription",
+      "name": "alarm_email",
+      "provider": "provider[\"registry.terraform.io/hashicorp/aws\"]",
+      "instances": [
+        {
+          "index_key": 0,
+          "schema_version": 0,
+          "attributes": {
+            "arn": "arn:aws:sns:us-east-1:363242104805:exam-platform-prod-alarms:5452e45f-f49f-4996-8f29-e8eedad83bba",
+            "confirmation_timeout_in_minutes": 1,
+            "confirmation_was_authenticated": false,
+            "delivery_policy": "",
+            "endpoint": "02230297.cst@rub.edu.bt",
+            "endpoint_auto_confirms": false,
+            "filter_policy": "",
+            "filter_policy_scope": "",
+            "id": "arn:aws:sns:us-east-1:363242104805:exam-platform-prod-alarms:5452e45f-f49f-4996-8f29-e8eedad83bba",
+            "owner_id": "363242104805",
+            "pending_confirmation": true,
+            "protocol": "email",
+            "raw_message_delivery": false,
+            "redrive_policy": "",
+            "replay_policy": "",
+            "subscription_role_arn": "",
+            "topic_arn": "arn:aws:sns:us-east-1:363242104805:exam-platform-prod-alarms"
+          },
+          "sensitive_attributes": [],
+          "identity_schema_version": 0,
+          "private": "bnVsbA==",
+          "dependencies": [
+            "aws_sns_topic.alarms"
+          ]
+        }
+      ]
+    },
+    {
+      "mode": "managed",
+      "type": "aws_sqs_queue",
+      "name": "dlq",
+      "provider": "provider[\"registry.terraform.io/hashicorp/aws\"]",
+      "instances": [
+        {
+          "index_key": "marking",
+          "schema_version": 0,
+          "attributes": {
+            "arn": "arn:aws:sqs:us-east-1:363242104805:exam-platform-prod-marking-dlq",
+            "content_based_deduplication": false,
+            "deduplication_scope": "",
+            "delay_seconds": 0,
+            "fifo_queue": false,
+            "fifo_throughput_limit": "",
+            "id": "https://sqs.us-east-1.amazonaws.com/363242104805/exam-platform-prod-marking-dlq",
+            "kms_data_key_reuse_period_seconds": 300,
+            "kms_master_key_id": "",
+            "max_message_size": 262144,
+            "message_retention_seconds": 1209600,
+            "name": "exam-platform-prod-marking-dlq",
+            "name_prefix": "",
+            "policy": "",
+            "receive_wait_time_seconds": 0,
+            "redrive_allow_policy": "",
+            "redrive_policy": "",
+            "sqs_managed_sse_enabled": true,
+            "tags": null,
+            "tags_all": {
+              "Environment": "prod",
+              "ManagedBy": "terraform",
+              "Project": "exam-platform"
+            },
+            "timeouts": null,
+            "url": "https://sqs.us-east-1.amazonaws.com/363242104805/exam-platform-prod-marking-dlq",
+            "visibility_timeout_seconds": 30
+          },
+          "sensitive_attributes": [],
+          "identity_schema_version": 0,
+          "private": "eyJlMmJmYjczMC1lY2FhLTExZTYtOGY4OC0zNDM2M2JjN2M0YzAiOnsiY3JlYXRlIjoxODAwMDAwMDAwMDAsImRlbGV0ZSI6MTgwMDAwMDAwMDAwLCJ1cGRhdGUiOjE4MDAwMDAwMDAwMH19"
+        },
+        {
+          "index_key": "notify",
+          "schema_version": 0,
+          "attributes": {
+            "arn": "arn:aws:sqs:us-east-1:363242104805:exam-platform-prod-notify-dlq",
+            "content_based_deduplication": false,
+            "deduplication_scope": "",
+            "delay_seconds": 0,
+            "fifo_queue": false,
+            "fifo_throughput_limit": "",
+            "id": "https://sqs.us-east-1.amazonaws.com/363242104805/exam-platform-prod-notify-dlq",
+            "kms_data_key_reuse_period_seconds": 300,
+            "kms_master_key_id": "",
+            "max_message_size": 262144,
+            "message_retention_seconds": 1209600,
+            "name": "exam-platform-prod-notify-dlq",
+            "name_prefix": "",
+            "policy": "",
+            "receive_wait_time_seconds": 0,
+            "redrive_allow_policy": "",
+            "redrive_policy": "",
+            "sqs_managed_sse_enabled": true,
+            "tags": null,
+            "tags_all": {
+              "Environment": "prod",
+              "ManagedBy": "terraform",
+              "Project": "exam-platform"
+            },
+            "timeouts": null,
+            "url": "https://sqs.us-east-1.amazonaws.com/363242104805/exam-platform-prod-notify-dlq",
+            "visibility_timeout_seconds": 30
+          },
+          "sensitive_attributes": [],
+          "identity_schema_version": 0,
+          "private": "eyJlMmJmYjczMC1lY2FhLTExZTYtOGY4OC0zNDM2M2JjN2M0YzAiOnsiY3JlYXRlIjoxODAwMDAwMDAwMDAsImRlbGV0ZSI6MTgwMDAwMDAwMDAwLCJ1cGRhdGUiOjE4MDAwMDAwMDAwMH19"
+        },
+        {
+          "index_key": "uploads",
+          "schema_version": 0,
+          "attributes": {
+            "arn": "arn:aws:sqs:us-east-1:363242104805:exam-platform-prod-uploads-dlq",
+            "content_based_deduplication": false,
+            "deduplication_scope": "",
+            "delay_seconds": 0,
+            "fifo_queue": false,
+            "fifo_throughput_limit": "",
+            "id": "https://sqs.us-east-1.amazonaws.com/363242104805/exam-platform-prod-uploads-dlq",
+            "kms_data_key_reuse_period_seconds": 300,
+            "kms_master_key_id": "",
+            "max_message_size": 262144,
+            "message_retention_seconds": 1209600,
+            "name": "exam-platform-prod-uploads-dlq",
+            "name_prefix": "",
+            "policy": "",
+            "receive_wait_time_seconds": 0,
+            "redrive_allow_policy": "",
+            "redrive_policy": "",
+            "sqs_managed_sse_enabled": true,
+            "tags": null,
+            "tags_all": {
+              "Environment": "prod",
+              "ManagedBy": "terraform",
+              "Project": "exam-platform"
+            },
+            "timeouts": null,
+            "url": "https://sqs.us-east-1.amazonaws.com/363242104805/exam-platform-prod-uploads-dlq",
+            "visibility_timeout_seconds": 30
+          },
+          "sensitive_attributes": [],
+          "identity_schema_version": 0,
+          "private": "eyJlMmJmYjczMC1lY2FhLTExZTYtOGY4OC0zNDM2M2JjN2M0YzAiOnsiY3JlYXRlIjoxODAwMDAwMDAwMDAsImRlbGV0ZSI6MTgwMDAwMDAwMDAwLCJ1cGRhdGUiOjE4MDAwMDAwMDAwMH19"
+        }
+      ]
+    },
+    {
+      "mode": "managed",
+      "type": "aws_sqs_queue",
+      "name": "main",
+      "provider": "provider[\"registry.terraform.io/hashicorp/aws\"]",
+      "instances": [
+        {
+          "index_key": "marking",
+          "schema_version": 0,
+          "attributes": {
+            "arn": "arn:aws:sqs:us-east-1:363242104805:exam-platform-prod-marking",
+            "content_based_deduplication": false,
+            "deduplication_scope": "",
+            "delay_seconds": 0,
+            "fifo_queue": false,
+            "fifo_throughput_limit": "",
+            "id": "https://sqs.us-east-1.amazonaws.com/363242104805/exam-platform-prod-marking",
+            "kms_data_key_reuse_period_seconds": 300,
+            "kms_master_key_id": "",
+            "max_message_size": 262144,
+            "message_retention_seconds": 345600,
+            "name": "exam-platform-prod-marking",
+            "name_prefix": "",
+            "policy": "",
+            "receive_wait_time_seconds": 20,
+            "redrive_allow_policy": "",
+            "redrive_policy": "{\"deadLetterTargetArn\":\"arn:aws:sqs:us-east-1:363242104805:exam-platform-prod-marking-dlq\",\"maxReceiveCount\":5}",
+            "sqs_managed_sse_enabled": true,
+            "tags": null,
+            "tags_all": {
+              "Environment": "prod",
+              "ManagedBy": "terraform",
+              "Project": "exam-platform"
+            },
+            "timeouts": null,
+            "url": "https://sqs.us-east-1.amazonaws.com/363242104805/exam-platform-prod-marking",
+            "visibility_timeout_seconds": 120
+          },
+          "sensitive_attributes": [],
+          "identity_schema_version": 0,
+          "private": "eyJlMmJmYjczMC1lY2FhLTExZTYtOGY4OC0zNDM2M2JjN2M0YzAiOnsiY3JlYXRlIjoxODAwMDAwMDAwMDAsImRlbGV0ZSI6MTgwMDAwMDAwMDAwLCJ1cGRhdGUiOjE4MDAwMDAwMDAwMH19",
+          "dependencies": [
+            "aws_sqs_queue.dlq"
+          ]
+        },
+        {
+          "index_key": "notify",
+          "schema_version": 0,
+          "attributes": {
+            "arn": "arn:aws:sqs:us-east-1:363242104805:exam-platform-prod-notify",
+            "content_based_deduplication": false,
+            "deduplication_scope": "",
+            "delay_seconds": 0,
+            "fifo_queue": false,
+            "fifo_throughput_limit": "",
+            "id": "https://sqs.us-east-1.amazonaws.com/363242104805/exam-platform-prod-notify",
+            "kms_data_key_reuse_period_seconds": 300,
+            "kms_master_key_id": "",
+            "max_message_size": 262144,
+            "message_retention_seconds": 345600,
+            "name": "exam-platform-prod-notify",
+            "name_prefix": "",
+            "policy": "",
+            "receive_wait_time_seconds": 20,
+            "redrive_allow_policy": "",
+            "redrive_policy": "{\"deadLetterTargetArn\":\"arn:aws:sqs:us-east-1:363242104805:exam-platform-prod-notify-dlq\",\"maxReceiveCount\":5}",
+            "sqs_managed_sse_enabled": true,
+            "tags": null,
+            "tags_all": {
+              "Environment": "prod",
+              "ManagedBy": "terraform",
+              "Project": "exam-platform"
+            },
+            "timeouts": null,
+            "url": "https://sqs.us-east-1.amazonaws.com/363242104805/exam-platform-prod-notify",
+            "visibility_timeout_seconds": 60
+          },
+          "sensitive_attributes": [],
+          "identity_schema_version": 0,
+          "private": "eyJlMmJmYjczMC1lY2FhLTExZTYtOGY4OC0zNDM2M2JjN2M0YzAiOnsiY3JlYXRlIjoxODAwMDAwMDAwMDAsImRlbGV0ZSI6MTgwMDAwMDAwMDAwLCJ1cGRhdGUiOjE4MDAwMDAwMDAwMH19",
+          "dependencies": [
+            "aws_sqs_queue.dlq"
+          ]
+        },
+        {
+          "index_key": "uploads",
+          "schema_version": 0,
+          "attributes": {
+            "arn": "arn:aws:sqs:us-east-1:363242104805:exam-platform-prod-uploads",
+            "content_based_deduplication": false,
+            "deduplication_scope": "",
+            "delay_seconds": 0,
+            "fifo_queue": false,
+            "fifo_throughput_limit": "",
+            "id": "https://sqs.us-east-1.amazonaws.com/363242104805/exam-platform-prod-uploads",
+            "kms_data_key_reuse_period_seconds": 300,
+            "kms_master_key_id": "",
+            "max_message_size": 262144,
+            "message_retention_seconds": 345600,
+            "name": "exam-platform-prod-uploads",
+            "name_prefix": "",
+            "policy": "",
+            "receive_wait_time_seconds": 20,
+            "redrive_allow_policy": "",
+            "redrive_policy": "{\"deadLetterTargetArn\":\"arn:aws:sqs:us-east-1:363242104805:exam-platform-prod-uploads-dlq\",\"maxReceiveCount\":5}",
+            "sqs_managed_sse_enabled": true,
+            "tags": null,
+            "tags_all": {
+              "Environment": "prod",
+              "ManagedBy": "terraform",
+              "Project": "exam-platform"
+            },
+            "timeouts": null,
+            "url": "https://sqs.us-east-1.amazonaws.com/363242104805/exam-platform-prod-uploads",
+            "visibility_timeout_seconds": 60
+          },
+          "sensitive_attributes": [],
+          "identity_schema_version": 0,
+          "private": "eyJlMmJmYjczMC1lY2FhLTExZTYtOGY4OC0zNDM2M2JjN2M0YzAiOnsiY3JlYXRlIjoxODAwMDAwMDAwMDAsImRlbGV0ZSI6MTgwMDAwMDAwMDAwLCJ1cGRhdGUiOjE4MDAwMDAwMDAwMH19",
+          "dependencies": [
+            "aws_sqs_queue.dlq"
+          ]
+        }
+      ]
+    },
+    {
+      "mode": "managed",
+      "type": "aws_sqs_queue_policy",
+      "name": "uploads",
+      "provider": "provider[\"registry.terraform.io/hashicorp/aws\"]",
+      "instances": [
+        {
+          "schema_version": 1,
+          "attributes": {
+            "id": "https://sqs.us-east-1.amazonaws.com/363242104805/exam-platform-prod-uploads",
+            "policy": "{\"Statement\":[{\"Action\":\"sqs:SendMessage\",\"Condition\":{\"ArnEquals\":{\"aws:SourceArn\":\"arn:aws:s3:::exam-platform-prod-uploads-363242104805\"},\"StringEquals\":{\"aws:SourceAccount\":\"363242104805\"}},\"Effect\":\"Allow\",\"Principal\":{\"Service\":\"s3.amazonaws.com\"},\"Resource\":\"arn:aws:sqs:us-east-1:363242104805:exam-platform-prod-uploads\",\"Sid\":\"AllowS3Events\"}],\"Version\":\"2012-10-17\"}",
+            "queue_url": "https://sqs.us-east-1.amazonaws.com/363242104805/exam-platform-prod-uploads"
+          },
+          "sensitive_attributes": [],
+          "identity_schema_version": 0,
+          "private": "eyJzY2hlbWFfdmVyc2lvbiI6IjEifQ==",
+          "dependencies": [
+            "aws_s3_bucket.uploads",
+            "aws_sqs_queue.dlq",
+            "aws_sqs_queue.main",
+            "data.aws_caller_identity.current"
+          ]
+        }
+      ]
+    },
+    {
+      "mode": "managed",
+      "type": "aws_subnet",
+      "name": "app",
+      "provider": "provider[\"registry.terraform.io/hashicorp/aws\"]",
+      "instances": [
+        {
+          "index_key": 0,
+          "schema_version": 1,
+          "attributes": {
+            "arn": "arn:aws:ec2:us-east-1:363242104805:subnet/subnet-0b35ffbef00b8ea72",
+            "assign_ipv6_address_on_creation": false,
+            "availability_zone": "us-east-1a",
+            "availability_zone_id": "use1-az1",
+            "cidr_block": "10.20.10.0/24",
+            "customer_owned_ipv4_pool": "",
+            "enable_dns64": false,
+            "enable_lni_at_device_index": 0,
+            "enable_resource_name_dns_a_record_on_launch": false,
+            "enable_resource_name_dns_aaaa_record_on_launch": false,
+            "id": "subnet-0b35ffbef00b8ea72",
+            "ipv6_cidr_block": "",
+            "ipv6_cidr_block_association_id": "",
+            "ipv6_native": false,
+            "map_customer_owned_ip_on_launch": false,
+            "map_public_ip_on_launch": false,
+            "outpost_arn": "",
+            "owner_id": "363242104805",
+            "private_dns_hostname_type_on_launch": "ip-name",
+            "tags": {
+              "Name": "exam-platform-prod-app-us-east-1a",
+              "Tier": "private-app"
+            },
+            "tags_all": {
+              "Environment": "prod",
+              "ManagedBy": "terraform",
+              "Name": "exam-platform-prod-app-us-east-1a",
+              "Project": "exam-platform",
+              "Tier": "private-app"
+            },
+            "timeouts": null,
+            "vpc_id": "vpc-0620110922ee993b6"
+          },
+          "sensitive_attributes": [],
+          "identity_schema_version": 0,
+          "private": "eyJlMmJmYjczMC1lY2FhLTExZTYtOGY4OC0zNDM2M2JjN2M0YzAiOnsiY3JlYXRlIjo2MDAwMDAwMDAwMDAsImRlbGV0ZSI6MTIwMDAwMDAwMDAwMH0sInNjaGVtYV92ZXJzaW9uIjoiMSJ9",
+          "dependencies": [
+            "aws_vpc.main",
+            "data.aws_availability_zones.available"
+          ]
+        },
+        {
+          "index_key": 1,
+          "schema_version": 1,
+          "attributes": {
+            "arn": "arn:aws:ec2:us-east-1:363242104805:subnet/subnet-0d8b820cdb7caa3f8",
+            "assign_ipv6_address_on_creation": false,
+            "availability_zone": "us-east-1b",
+            "availability_zone_id": "use1-az2",
+            "cidr_block": "10.20.11.0/24",
+            "customer_owned_ipv4_pool": "",
+            "enable_dns64": false,
+            "enable_lni_at_device_index": 0,
+            "enable_resource_name_dns_a_record_on_launch": false,
+            "enable_resource_name_dns_aaaa_record_on_launch": false,
+            "id": "subnet-0d8b820cdb7caa3f8",
+            "ipv6_cidr_block": "",
+            "ipv6_cidr_block_association_id": "",
+            "ipv6_native": false,
+            "map_customer_owned_ip_on_launch": false,
+            "map_public_ip_on_launch": false,
+            "outpost_arn": "",
+            "owner_id": "363242104805",
+            "private_dns_hostname_type_on_launch": "ip-name",
+            "tags": {
+              "Name": "exam-platform-prod-app-us-east-1b",
+              "Tier": "private-app"
+            },
+            "tags_all": {
+              "Environment": "prod",
+              "ManagedBy": "terraform",
+              "Name": "exam-platform-prod-app-us-east-1b",
+              "Project": "exam-platform",
+              "Tier": "private-app"
+            },
+            "timeouts": null,
+            "vpc_id": "vpc-0620110922ee993b6"
+          },
+          "sensitive_attributes": [],
+          "identity_schema_version": 0,
+          "private": "eyJlMmJmYjczMC1lY2FhLTExZTYtOGY4OC0zNDM2M2JjN2M0YzAiOnsiY3JlYXRlIjo2MDAwMDAwMDAwMDAsImRlbGV0ZSI6MTIwMDAwMDAwMDAwMH0sInNjaGVtYV92ZXJzaW9uIjoiMSJ9",
+          "dependencies": [
+            "aws_vpc.main",
+            "data.aws_availability_zones.available"
+          ]
+        }
+      ]
+    },
+    {
+      "mode": "managed",
+      "type": "aws_subnet",
+      "name": "data",
+      "provider": "provider[\"registry.terraform.io/hashicorp/aws\"]",
+      "instances": [
+        {
+          "index_key": 0,
+          "schema_version": 1,
+          "attributes": {
+            "arn": "arn:aws:ec2:us-east-1:363242104805:subnet/subnet-02df6122004f455a4",
+            "assign_ipv6_address_on_creation": false,
+            "availability_zone": "us-east-1a",
+            "availability_zone_id": "use1-az1",
+            "cidr_block": "10.20.20.0/24",
+            "customer_owned_ipv4_pool": "",
+            "enable_dns64": false,
+            "enable_lni_at_device_index": 0,
+            "enable_resource_name_dns_a_record_on_launch": false,
+            "enable_resource_name_dns_aaaa_record_on_launch": false,
+            "id": "subnet-02df6122004f455a4",
+            "ipv6_cidr_block": "",
+            "ipv6_cidr_block_association_id": "",
+            "ipv6_native": false,
+            "map_customer_owned_ip_on_launch": false,
+            "map_public_ip_on_launch": false,
+            "outpost_arn": "",
+            "owner_id": "363242104805",
+            "private_dns_hostname_type_on_launch": "ip-name",
+            "tags": {
+              "Name": "exam-platform-prod-data-us-east-1a",
+              "Tier": "private-data"
+            },
+            "tags_all": {
+              "Environment": "prod",
+              "ManagedBy": "terraform",
+              "Name": "exam-platform-prod-data-us-east-1a",
+              "Project": "exam-platform",
+              "Tier": "private-data"
+            },
+            "timeouts": null,
+            "vpc_id": "vpc-0620110922ee993b6"
+          },
+          "sensitive_attributes": [],
+          "identity_schema_version": 0,
+          "private": "eyJlMmJmYjczMC1lY2FhLTExZTYtOGY4OC0zNDM2M2JjN2M0YzAiOnsiY3JlYXRlIjo2MDAwMDAwMDAwMDAsImRlbGV0ZSI6MTIwMDAwMDAwMDAwMH0sInNjaGVtYV92ZXJzaW9uIjoiMSJ9",
+          "dependencies": [
+            "aws_vpc.main",
+            "data.aws_availability_zones.available"
+          ]
+        },
+        {
+          "index_key": 1,
+          "schema_version": 1,
+          "attributes": {
+            "arn": "arn:aws:ec2:us-east-1:363242104805:subnet/subnet-021d631272c274034",
+            "assign_ipv6_address_on_creation": false,
+            "availability_zone": "us-east-1b",
+            "availability_zone_id": "use1-az2",
+            "cidr_block": "10.20.21.0/24",
+            "customer_owned_ipv4_pool": "",
+            "enable_dns64": false,
+            "enable_lni_at_device_index": 0,
+            "enable_resource_name_dns_a_record_on_launch": false,
+            "enable_resource_name_dns_aaaa_record_on_launch": false,
+            "id": "subnet-021d631272c274034",
+            "ipv6_cidr_block": "",
+            "ipv6_cidr_block_association_id": "",
+            "ipv6_native": false,
+            "map_customer_owned_ip_on_launch": false,
+            "map_public_ip_on_launch": false,
+            "outpost_arn": "",
+            "owner_id": "363242104805",
+            "private_dns_hostname_type_on_launch": "ip-name",
+            "tags": {
+              "Name": "exam-platform-prod-data-us-east-1b",
+              "Tier": "private-data"
+            },
+            "tags_all": {
+              "Environment": "prod",
+              "ManagedBy": "terraform",
+              "Name": "exam-platform-prod-data-us-east-1b",
+              "Project": "exam-platform",
+              "Tier": "private-data"
+            },
+            "timeouts": null,
+            "vpc_id": "vpc-0620110922ee993b6"
+          },
+          "sensitive_attributes": [],
+          "identity_schema_version": 0,
+          "private": "eyJlMmJmYjczMC1lY2FhLTExZTYtOGY4OC0zNDM2M2JjN2M0YzAiOnsiY3JlYXRlIjo2MDAwMDAwMDAwMDAsImRlbGV0ZSI6MTIwMDAwMDAwMDAwMH0sInNjaGVtYV92ZXJzaW9uIjoiMSJ9",
+          "dependencies": [
+            "aws_vpc.main",
+            "data.aws_availability_zones.available"
+          ]
+        }
+      ]
+    },
+    {
+      "mode": "managed",
+      "type": "aws_subnet",
+      "name": "public",
+      "provider": "provider[\"registry.terraform.io/hashicorp/aws\"]",
+      "instances": [
+        {
+          "index_key": 0,
+          "schema_version": 1,
+          "attributes": {
+            "arn": "arn:aws:ec2:us-east-1:363242104805:subnet/subnet-0fd378457483eab51",
+            "assign_ipv6_address_on_creation": false,
+            "availability_zone": "us-east-1a",
+            "availability_zone_id": "use1-az1",
+            "cidr_block": "10.20.0.0/24",
+            "customer_owned_ipv4_pool": "",
+            "enable_dns64": false,
+            "enable_lni_at_device_index": 0,
+            "enable_resource_name_dns_a_record_on_launch": false,
+            "enable_resource_name_dns_aaaa_record_on_launch": false,
+            "id": "subnet-0fd378457483eab51",
+            "ipv6_cidr_block": "",
+            "ipv6_cidr_block_association_id": "",
+            "ipv6_native": false,
+            "map_customer_owned_ip_on_launch": false,
+            "map_public_ip_on_launch": false,
+            "outpost_arn": "",
+            "owner_id": "363242104805",
+            "private_dns_hostname_type_on_launch": "ip-name",
+            "tags": {
+              "Name": "exam-platform-prod-public-us-east-1a",
+              "Tier": "public"
+            },
+            "tags_all": {
+              "Environment": "prod",
+              "ManagedBy": "terraform",
+              "Name": "exam-platform-prod-public-us-east-1a",
+              "Project": "exam-platform",
+              "Tier": "public"
+            },
+            "timeouts": null,
+            "vpc_id": "vpc-0620110922ee993b6"
+          },
+          "sensitive_attributes": [],
+          "identity_schema_version": 0,
+          "private": "eyJlMmJmYjczMC1lY2FhLTExZTYtOGY4OC0zNDM2M2JjN2M0YzAiOnsiY3JlYXRlIjo2MDAwMDAwMDAwMDAsImRlbGV0ZSI6MTIwMDAwMDAwMDAwMH0sInNjaGVtYV92ZXJzaW9uIjoiMSJ9",
+          "dependencies": [
+            "aws_vpc.main",
+            "data.aws_availability_zones.available"
+          ]
+        },
+        {
+          "index_key": 1,
+          "schema_version": 1,
+          "attributes": {
+            "arn": "arn:aws:ec2:us-east-1:363242104805:subnet/subnet-024efe5099ea27228",
+            "assign_ipv6_address_on_creation": false,
+            "availability_zone": "us-east-1b",
+            "availability_zone_id": "use1-az2",
+            "cidr_block": "10.20.1.0/24",
+            "customer_owned_ipv4_pool": "",
+            "enable_dns64": false,
+            "enable_lni_at_device_index": 0,
+            "enable_resource_name_dns_a_record_on_launch": false,
+            "enable_resource_name_dns_aaaa_record_on_launch": false,
+            "id": "subnet-024efe5099ea27228",
+            "ipv6_cidr_block": "",
+            "ipv6_cidr_block_association_id": "",
+            "ipv6_native": false,
+            "map_customer_owned_ip_on_launch": false,
+            "map_public_ip_on_launch": false,
+            "outpost_arn": "",
+            "owner_id": "363242104805",
+            "private_dns_hostname_type_on_launch": "ip-name",
+            "tags": {
+              "Name": "exam-platform-prod-public-us-east-1b",
+              "Tier": "public"
+            },
+            "tags_all": {
+              "Environment": "prod",
+              "ManagedBy": "terraform",
+              "Name": "exam-platform-prod-public-us-east-1b",
+              "Project": "exam-platform",
+              "Tier": "public"
+            },
+            "timeouts": null,
+            "vpc_id": "vpc-0620110922ee993b6"
+          },
+          "sensitive_attributes": [],
+          "identity_schema_version": 0,
+          "private": "eyJlMmJmYjczMC1lY2FhLTExZTYtOGY4OC0zNDM2M2JjN2M0YzAiOnsiY3JlYXRlIjo2MDAwMDAwMDAwMDAsImRlbGV0ZSI6MTIwMDAwMDAwMDAwMH0sInNjaGVtYV92ZXJzaW9uIjoiMSJ9",
+          "dependencies": [
+            "aws_vpc.main",
+            "data.aws_availability_zones.available"
+          ]
+        }
+      ]
+    },
+    {
+      "mode": "managed",
+      "type": "aws_vpc",
+      "name": "main",
+      "provider": "provider[\"registry.terraform.io/hashicorp/aws\"]",
+      "instances": [
+        {
+          "schema_version": 1,
+          "attributes": {
+            "arn": "arn:aws:ec2:us-east-1:363242104805:vpc/vpc-0620110922ee993b6",
+            "assign_generated_ipv6_cidr_block": false,
+            "cidr_block": "10.20.0.0/16",
+            "default_network_acl_id": "acl-03b061bf0e9197772",
+            "default_route_table_id": "rtb-0ca49b52ed0415a98",
+            "default_security_group_id": "sg-001605d6abfe744db",
+            "dhcp_options_id": "dopt-0eeb447ae62aa148f",
+            "enable_dns_hostnames": true,
+            "enable_dns_support": true,
+            "enable_network_address_usage_metrics": false,
+            "id": "vpc-0620110922ee993b6",
+            "instance_tenancy": "default",
+            "ipv4_ipam_pool_id": null,
+            "ipv4_netmask_length": null,
+            "ipv6_association_id": "",
+            "ipv6_cidr_block": "",
+            "ipv6_cidr_block_network_border_group": "",
+            "ipv6_ipam_pool_id": "",
+            "ipv6_netmask_length": 0,
+            "main_route_table_id": "rtb-0ca49b52ed0415a98",
+            "owner_id": "363242104805",
+            "tags": {
+              "Name": "exam-platform-prod-vpc"
+            },
+            "tags_all": {
+              "Environment": "prod",
+              "ManagedBy": "terraform",
+              "Name": "exam-platform-prod-vpc",
+              "Project": "exam-platform"
+            }
+          },
+          "sensitive_attributes": [],
+          "identity_schema_version": 0,
+          "private": "eyJzY2hlbWFfdmVyc2lvbiI6IjEifQ=="
+        }
+      ]
+    },
+    {
+      "mode": "managed",
+      "type": "aws_vpc_endpoint",
+      "name": "s3",
+      "provider": "provider[\"registry.terraform.io/hashicorp/aws\"]",
+      "instances": [
+        {
+          "schema_version": 0,
+          "attributes": {
+            "arn": "arn:aws:ec2:us-east-1:363242104805:vpc-endpoint/vpce-004d1c36b9352452b",
+            "auto_accept": null,
+            "cidr_blocks": [
+              "16.182.0.0/16",
+              "54.231.0.0/16",
+              "3.5.0.0/19",
+              "52.216.0.0/15",
+              "16.15.156.0/22",
+              "16.15.96.0/20",
+              "16.15.160.0/19",
+              "18.34.0.0/19",
+              "16.15.64.0/19",
+              "3.2.103.0/24",
+              "18.34.232.0/21",
+              "16.15.192.0/18",
+              "16.15.112.0/21",
+              "16.15.120.0/22"
+            ],
+            "dns_entry": [],
+            "dns_options": [
+              {
+                "dns_record_ip_type": "service-defined",
+                "private_dns_only_for_inbound_resolver_endpoint": false
+              }
+            ],
+            "id": "vpce-004d1c36b9352452b",
+            "ip_address_type": "ipv4",
+            "network_interface_ids": [],
+            "owner_id": "363242104805",
+            "policy": "{\"Statement\":[{\"Action\":\"*\",\"Effect\":\"Allow\",\"Principal\":\"*\",\"Resource\":\"*\"}],\"Version\":\"2008-10-17\"}",
+            "prefix_list_id": "pl-63a5400a",
+            "private_dns_enabled": false,
+            "requester_managed": false,
+            "resource_configuration_arn": "",
+            "route_table_ids": [
+              "rtb-032bb3f817b714dcd",
+              "rtb-08aee4789a0046e87"
+            ],
+            "security_group_ids": [],
+            "service_name": "com.amazonaws.us-east-1.s3",
+            "service_network_arn": "",
+            "service_region": "us-east-1",
+            "state": "available",
+            "subnet_configuration": [],
+            "subnet_ids": [],
+            "tags": {
+              "Name": "exam-platform-prod-s3-gw"
+            },
+            "tags_all": {
+              "Environment": "prod",
+              "ManagedBy": "terraform",
+              "Name": "exam-platform-prod-s3-gw",
+              "Project": "exam-platform"
+            },
+            "timeouts": null,
+            "vpc_endpoint_type": "Gateway",
+            "vpc_id": "vpc-0620110922ee993b6"
+          },
+          "sensitive_attributes": [],
+          "identity_schema_version": 0,
+          "private": "eyJlMmJmYjczMC1lY2FhLTExZTYtOGY4OC0zNDM2M2JjN2M0YzAiOnsiY3JlYXRlIjo2MDAwMDAwMDAwMDAsImRlbGV0ZSI6NjAwMDAwMDAwMDAwLCJ1cGRhdGUiOjYwMDAwMDAwMDAwMH19",
+          "dependencies": [
+            "aws_eip.nat",
+            "aws_internet_gateway.main",
+            "aws_nat_gateway.main",
+            "aws_route_table.private",
+            "aws_subnet.public",
+            "aws_vpc.main",
+            "data.aws_availability_zones.available"
+          ]
+        }
+      ]
+    },
+    {
+      "mode": "managed",
+      "type": "aws_vpc_endpoint",
+      "name": "secretsmanager",
+      "provider": "provider[\"registry.terraform.io/hashicorp/aws\"]",
+      "instances": []
+    },
+    {
+      "mode": "managed",
+      "type": "aws_vpc_endpoint",
+      "name": "sqs",
+      "provider": "provider[\"registry.terraform.io/hashicorp/aws\"]",
+      "instances": [
+        {
+          "schema_version": 0,
+          "attributes": {
+            "arn": "arn:aws:ec2:us-east-1:363242104805:vpc-endpoint/vpce-0cae6800490b01015",
+            "auto_accept": null,
+            "cidr_blocks": [],
+            "dns_entry": [
+              {
+                "dns_name": "vpce-0cae6800490b01015-hlc54e2a.sqs.us-east-1.vpce.amazonaws.com",
+                "hosted_zone_id": "Z7HUB22UULQXV"
+              },
+              {
+                "dns_name": "vpce-0cae6800490b01015-hlc54e2a-us-east-1a.sqs.us-east-1.vpce.amazonaws.com",
+                "hosted_zone_id": "Z7HUB22UULQXV"
+              },
+              {
+                "dns_name": "vpce-0cae6800490b01015-hlc54e2a-us-east-1b.sqs.us-east-1.vpce.amazonaws.com",
+                "hosted_zone_id": "Z7HUB22UULQXV"
+              },
+              {
+                "dns_name": "sqs.us-east-1.amazonaws.com",
+                "hosted_zone_id": "Z06147663IHKR0NSS48B9"
+              },
+              {
+                "dns_name": "sqs.us-east-1.api.aws",
+                "hosted_zone_id": "Z04149491FWMM4X2DJ6QG"
+              }
+            ],
+            "dns_options": [
+              {
+                "dns_record_ip_type": "ipv4",
+                "private_dns_only_for_inbound_resolver_endpoint": false
+              }
+            ],
+            "id": "vpce-0cae6800490b01015",
+            "ip_address_type": "ipv4",
+            "network_interface_ids": [
+              "eni-080d9edc08b1dda70",
+              "eni-0ecdbda322415afab"
+            ],
+            "owner_id": "363242104805",
+            "policy": "{\"Statement\":[{\"Action\":\"*\",\"Effect\":\"Allow\",\"Principal\":\"*\",\"Resource\":\"*\"}]}",
+            "prefix_list_id": null,
+            "private_dns_enabled": true,
+            "requester_managed": false,
+            "resource_configuration_arn": "",
+            "route_table_ids": [],
+            "security_group_ids": [
+              "sg-0acab2d25fbf23abd"
+            ],
+            "service_name": "com.amazonaws.us-east-1.sqs",
+            "service_network_arn": "",
+            "service_region": "us-east-1",
+            "state": "available",
+            "subnet_configuration": [
+              {
+                "ipv4": "10.20.10.217",
+                "ipv6": "",
+                "subnet_id": "subnet-0b35ffbef00b8ea72"
+              },
+              {
+                "ipv4": "10.20.11.244",
+                "ipv6": "",
+                "subnet_id": "subnet-0d8b820cdb7caa3f8"
+              }
+            ],
+            "subnet_ids": [
+              "subnet-0b35ffbef00b8ea72",
+              "subnet-0d8b820cdb7caa3f8"
+            ],
+            "tags": {
+              "Name": "exam-platform-prod-sqs-vpce"
+            },
+            "tags_all": {
+              "Environment": "prod",
+              "ManagedBy": "terraform",
+              "Name": "exam-platform-prod-sqs-vpce",
+              "Project": "exam-platform"
+            },
+            "timeouts": null,
+            "vpc_endpoint_type": "Interface",
+            "vpc_id": "vpc-0620110922ee993b6"
+          },
+          "sensitive_attributes": [],
+          "identity_schema_version": 0,
+          "private": "eyJlMmJmYjczMC1lY2FhLTExZTYtOGY4OC0zNDM2M2JjN2M0YzAiOnsiY3JlYXRlIjo2MDAwMDAwMDAwMDAsImRlbGV0ZSI6NjAwMDAwMDAwMDAwLCJ1cGRhdGUiOjYwMDAwMDAwMDAwMH19",
+          "dependencies": [
+            "aws_security_group.endpoints",
+            "aws_security_group.lambda",
+            "aws_subnet.app",
+            "aws_vpc.main",
+            "data.aws_availability_zones.available"
+          ]
+        }
+      ]
+    },
+    {
+      "mode": "managed",
+      "type": "aws_wafv2_web_acl",
+      "name": "main",
+      "provider": "provider[\"registry.terraform.io/hashicorp/aws\"].us_east_1",
+      "instances": [
+        {
+          "schema_version": 0,
+          "attributes": {
+            "application_integration_url": "",
+            "arn": "arn:aws:wafv2:us-east-1:363242104805:global/webacl/exam-platform-prod-waf/662f13e6-75db-4a32-97ec-cb974d4c926b",
+            "association_config": [],
+            "capacity": 902,
+            "captcha_config": [],
+            "challenge_config": [],
+            "custom_response_body": [],
+            "data_protection_config": [],
+            "default_action": [
+              {
+                "allow": [
+                  {
+                    "custom_request_handling": []
+                  }
+                ],
+                "block": []
+              }
+            ],
+            "description": "",
+            "id": "662f13e6-75db-4a32-97ec-cb974d4c926b",
+            "lock_token": "4530cc75-bf5b-4f6d-93a1-f59266f31369",
+            "name": "exam-platform-prod-waf",
+            "name_prefix": "",
+            "rule": [
+              {
+                "action": [
+                  {
+                    "allow": [],
+                    "block": [
+                      {
+                        "custom_response": []
+                      }
+                    ],
+                    "captcha": [],
+                    "challenge": [],
+                    "count": []
+                  }
+                ],
+                "captcha_config": [],
+                "challenge_config": [],
+                "name": "RateLimitPerIp",
+                "override_action": [],
+                "priority": 3,
+                "rule_label": [],
+                "statement": [
+                  {
+                    "and_statement": [],
+                    "asn_match_statement": [],
+                    "byte_match_statement": [],
+                    "geo_match_statement": [],
+                    "ip_set_reference_statement": [],
+                    "label_match_statement": [],
+                    "managed_rule_group_statement": [],
+                    "not_statement": [],
+                    "or_statement": [],
+                    "rate_based_statement": [
+                      {
+                        "aggregate_key_type": "IP",
+                        "custom_key": [],
+                        "evaluation_window_sec": 300,
+                        "forwarded_ip_config": [],
+                        "limit": 20000,
+                        "scope_down_statement": []
+                      }
+                    ],
+                    "regex_match_statement": [],
+                    "regex_pattern_set_reference_statement": [],
+                    "rule_group_reference_statement": [],
+                    "size_constraint_statement": [],
+                    "sqli_match_statement": [],
+                    "xss_match_statement": []
+                  }
+                ],
+                "visibility_config": [
+                  {
+                    "cloudwatch_metrics_enabled": true,
+                    "metric_name": "ratelimit",
+                    "sampled_requests_enabled": true
+                  }
+                ]
+              },
+              {
+                "action": [],
+                "captcha_config": [],
+                "challenge_config": [],
+                "name": "AWSCommonRules",
+                "override_action": [
+                  {
+                    "count": [],
+                    "none": [
+                      {}
+                    ]
+                  }
+                ],
+                "priority": 1,
+                "rule_label": [],
+                "statement": [
+                  {
+                    "and_statement": [],
+                    "asn_match_statement": [],
+                    "byte_match_statement": [],
+                    "geo_match_statement": [],
+                    "ip_set_reference_statement": [],
+                    "label_match_statement": [],
+                    "managed_rule_group_statement": [
+                      {
+                        "managed_rule_group_configs": [],
+                        "name": "AWSManagedRulesCommonRuleSet",
+                        "rule_action_override": [
+                          {
+                            "action_to_use": [
+                              {
+                                "allow": [],
+                                "block": [],
+                                "captcha": [],
+                                "challenge": [],
+                                "count": [
+                                  {
+                                    "custom_request_handling": []
+                                  }
+                                ]
+                              }
+                            ],
+                            "name": "SizeRestrictions_BODY"
+                          }
+                        ],
+                        "scope_down_statement": [],
+                        "vendor_name": "AWS",
+                        "version": ""
+                      }
+                    ],
+                    "not_statement": [],
+                    "or_statement": [],
+                    "rate_based_statement": [],
+                    "regex_match_statement": [],
+                    "regex_pattern_set_reference_statement": [],
+                    "rule_group_reference_statement": [],
+                    "size_constraint_statement": [],
+                    "sqli_match_statement": [],
+                    "xss_match_statement": []
+                  }
+                ],
+                "visibility_config": [
+                  {
+                    "cloudwatch_metrics_enabled": true,
+                    "metric_name": "common",
+                    "sampled_requests_enabled": true
+                  }
+                ]
+              },
+              {
+                "action": [],
+                "captcha_config": [],
+                "challenge_config": [],
+                "name": "AWSKnownBadInputs",
+                "override_action": [
+                  {
+                    "count": [],
+                    "none": [
+                      {}
+                    ]
+                  }
+                ],
+                "priority": 2,
+                "rule_label": [],
+                "statement": [
+                  {
+                    "and_statement": [],
+                    "asn_match_statement": [],
+                    "byte_match_statement": [],
+                    "geo_match_statement": [],
+                    "ip_set_reference_statement": [],
+                    "label_match_statement": [],
+                    "managed_rule_group_statement": [
+                      {
+                        "managed_rule_group_configs": [],
+                        "name": "AWSManagedRulesKnownBadInputsRuleSet",
+                        "rule_action_override": [],
+                        "scope_down_statement": [],
+                        "vendor_name": "AWS",
+                        "version": ""
+                      }
+                    ],
+                    "not_statement": [],
+                    "or_statement": [],
+                    "rate_based_statement": [],
+                    "regex_match_statement": [],
+                    "regex_pattern_set_reference_statement": [],
+                    "rule_group_reference_statement": [],
+                    "size_constraint_statement": [],
+                    "sqli_match_statement": [],
+                    "xss_match_statement": []
+                  }
+                ],
+                "visibility_config": [
+                  {
+                    "cloudwatch_metrics_enabled": true,
+                    "metric_name": "badinputs",
+                    "sampled_requests_enabled": true
+                  }
+                ]
+              }
+            ],
+            "rule_json": null,
+            "scope": "CLOUDFRONT",
+            "tags": null,
+            "tags_all": {
+              "Environment": "prod",
+              "ManagedBy": "terraform",
+              "Project": "exam-platform"
+            },
+            "token_domains": null,
+            "visibility_config": [
+              {
+                "cloudwatch_metrics_enabled": true,
+                "metric_name": "exam-platform-prod-waf",
+                "sampled_requests_enabled": true
+              }
+            ]
+          },
+          "sensitive_attributes": [],
+          "identity_schema_version": 0,
+          "private": "bnVsbA=="
+        }
+      ]
+    }
+  ],
+  "check_results": null
+}
